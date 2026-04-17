@@ -1,5 +1,12 @@
 using UnityEngine;
 
+/*
+ * BiomeMechanic
+ * -------------
+ * Base class for biome-specific mechanics that affect gameplay conditions (e.g. temperature, visibility, movement).
+ * Activated when the player enters a biome and deactivated on exit.
+ */
+
 public abstract class BiomeMechanic : MonoBehaviour
 {
     // Variables

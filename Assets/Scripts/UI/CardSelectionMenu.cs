@@ -1,5 +1,12 @@
 using UnityEngine;
 
+/*
+ * CardSelectionMenu
+ * -----------
+ * Displays three hidden modifier cards during gameplay.
+ * Handles player interaction for selecting and revealing cards.
+ */
+
 public class CardSelectionMenu : MonoBehaviour
 {
     // Variables

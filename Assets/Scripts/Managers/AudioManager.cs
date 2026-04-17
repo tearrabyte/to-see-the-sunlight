@@ -1,5 +1,12 @@
 using UnityEngine;
 
+/*
+ * AudioManager
+ * ------------
+ * Manages all game audio including music and sound effects.
+ * Provides a centralised control for playing, stopping and adjusting audio based on game state (e.g. pause, death).
+ */
+
 public class AudioManager : MonoBehaviour
 {
     // Variables

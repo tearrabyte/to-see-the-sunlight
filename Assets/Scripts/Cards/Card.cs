@@ -1,5 +1,12 @@
 using UnityEngine;
 
+/*
+ * Card
+ * ----
+ * Represents a selectable card that corresponds to a modifier.
+ * Cards are selected and revealed to apply their respective effects.
+ */
+
 public class Card : MonoBehaviour
 {
     // Variables

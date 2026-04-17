@@ -1,6 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * CardSelectionSystem
+ * -------------------
+ * Handles logic for presenting and selecting cards.
+ */
+
 public class CardSelectionSystem : MonoBehaviour
 {
     // Variables

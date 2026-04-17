@@ -1,5 +1,12 @@
 using UnityEngine;
 
+/*
+ * Menu
+ * ----
+ * Base class for all UI menus displayed outside of active gameplay.
+ * Provides common functionality for opening, closing, and toggling UI panels.
+ */
+
 public class Menu : MonoBehaviour
 {
     // Variables

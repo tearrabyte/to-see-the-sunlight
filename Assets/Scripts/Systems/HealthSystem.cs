@@ -1,6 +1,13 @@
 using System;
 using UnityEngine;
 
+/*
+ * HealthSystem
+ * ------------
+ * Handles player health including damage, healing, and alive state.
+ * Notifies other systems when health values change or when the player dies.
+ */
+
 public class HealthSystem : MonoBehaviour
 {
     // Variables

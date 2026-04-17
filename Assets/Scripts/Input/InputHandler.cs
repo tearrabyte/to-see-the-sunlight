@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/*
+ * InputHandler
+ * -----------
+ * Processes player input for the PlayerMovement system.
+ */
+
 public class InputHandler : MonoBehaviour
 {
     // Variables

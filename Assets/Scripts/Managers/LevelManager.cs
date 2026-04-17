@@ -2,6 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * LevelManager
+ * ------------
+ * Manages level lifecycle including loading, unloading, and restarting levels.
+ * Tracks the current active level and handles transitions between levels.
+ */
+
 public class LevelManager : MonoBehaviour
 {
     // Variables

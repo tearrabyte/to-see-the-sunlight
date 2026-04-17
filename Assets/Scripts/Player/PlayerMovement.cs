@@ -1,5 +1,12 @@
 using UnityEngine;
 
+/*
+ * PlayerMovement
+ * --------------
+ * Controls player movement including directional movement and jumping.
+ * Responsible for applying movement-related modifiers such as speed changes.
+ */
+
 public class PlayerMovement : MonoBehaviour
 {
     // Variables

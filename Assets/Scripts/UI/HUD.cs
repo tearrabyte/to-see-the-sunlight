@@ -1,5 +1,12 @@
 using UnityEngine;
 
+/*
+ * HUD
+ * ---
+ * Displays real-time gameplay information for the player including health, a level timer, and active modifiers.
+ * Updates dynamically based on system events.
+ */
+
 public class HUD : MonoBehaviour
 {
     // Variables

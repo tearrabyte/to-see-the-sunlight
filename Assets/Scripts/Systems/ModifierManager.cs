@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 
+/*
+ * ModifierManager
+ * ---------------
+ * Manages all active modifiers applied to the player.
+ * Handles the application, removal and updating of modifier effects.
+ */
+
 public class ModifierManager : MonoBehaviour
 {
     // Variables

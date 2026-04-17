@@ -1,6 +1,13 @@
 using System;
 using UnityEngine;
 
+/*
+ * Timer
+ * -----
+ * Manages timer state including running, pausing, or stopping.
+ * Tracks elapsed level time and notifies other systems when time updates.
+ */
+
 public class Timer : MonoBehaviour
 {
     // Variables

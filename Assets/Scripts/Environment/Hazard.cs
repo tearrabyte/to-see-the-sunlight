@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/*
+ * Hazard
+ * ------
+ * Represents an environmental hazard that can damage or affect the player.
+ */
+
 public abstract class Hazard : MonoBehaviour
 {
     // Variables

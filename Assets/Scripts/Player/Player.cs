@@ -1,5 +1,12 @@
 using UnityEngine;
 
+/*
+ * Player
+ * ------
+ * Represents the player entity.
+ * Coordinates core player systems including health, movement, modifiers, and view.
+ */
+
 public class Player : MonoBehaviour
 {
     // Variables

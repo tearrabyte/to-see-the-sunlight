@@ -1,6 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * PlayerView
+ * -----------
+ * Manages the visual representation of the player including sprite rendering and visual effects.
+ * Controls vision-related properties such as a limited vision radius.
+ */
+
 public class PlayerView : MonoBehaviour
 {
     // Variables

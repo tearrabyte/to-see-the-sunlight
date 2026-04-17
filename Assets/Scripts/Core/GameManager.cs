@@ -1,6 +1,14 @@
 using System;
 using UnityEngine;
 
+/*
+ * GameManager
+ * -----------
+ * Controls overall game flow, and manages core game events.
+ * Includes starting, pausing, restarting and ending runs.
+ * Acts as a central coordinator between core systems including LevelManager, AudioManager, and UIManager. 
+ */
+
 public class GameManager : MonoBehaviour
 {
     // Variables

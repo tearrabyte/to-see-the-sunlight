@@ -1,6 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Level
+ * -----
+ * Represents a single playable level.
+ * Contains level-specific data such as layout, hazards, and biome configuration.
+ * Used by LevelManager to load and manage gameplay environments.
+ */
+
 public class Level : MonoBehaviour
 {
     // Variables
