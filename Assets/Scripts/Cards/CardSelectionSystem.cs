@@ -22,6 +22,8 @@ public class CardSelectionSystem : MonoBehaviour
             return;
         }
 
+        selectedCard = card;
+
         if (modifierManager != null && card.modifier != null)
         {
             {

@@ -5,7 +5,7 @@ public class PlayerView : MonoBehaviour
 {
     // Variables
     public SpriteRenderer spriteRenderer;
-    public List<Modifier> currentEffects;
+    public List<Modifier> currentEffects = new List<Modifier>();
     public Player player;
     public float visionRadius;
 

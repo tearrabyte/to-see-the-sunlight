@@ -7,7 +7,7 @@ public class Level : MonoBehaviour
     [SerializeField] private List<Hazard> hazards;
     [SerializeField] private BiomeMechanic biomeMechanic;
     [SerializeField] private AudioManager audioManager;
-    [SerializeField] private PlayerPrefs player;
+    [SerializeField] private Player player;
     [SerializeField] private Transform spawnPoint;
 
     private LevelManager levelManager;

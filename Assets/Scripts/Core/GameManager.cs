@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartRun()
     {
+        isRunActive = true;
         levelManager.RestartLevel();
         onRunStart?.Invoke();
     }
