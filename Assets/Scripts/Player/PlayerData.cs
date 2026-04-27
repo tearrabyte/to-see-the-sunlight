@@ -4,9 +4,13 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("Movement")]
-    public float moveSpeed = 10f;
-    public float acceleration = 50f;
-    public float deceleration = 50f;
+    public float maxSpeed = 10f;
+
+    public float groundAcceleration = 50f;
+    public float groundDeceleration = 50f;
+
+    public float airAcceleration = 30f;
+    public float airDeceleration = 20f;
 
     [Header("Jump")]
     public float jumpForce = 12f;

@@ -9,23 +9,55 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Variables
+    // References
     public PlayerData data;
     public InputHandler input;
 
-    // Methods
-    public void Move(Vector2 direction)
-    {
+    // Components
+    private Rigidbody2D _rb;
 
+    // State
+    public bool IsGrounded { get; private set; }
+
+    // Methods
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Jump()
+    private void FixedUpdate()
     {
+        HandleMovement();
+    }
 
+    private void HandleMovement()
+    {
+        // Desired horizontal speed
+        float targetSpeed = input.MoveInput.x * data.maxSpeed;
+
+        // Select acceleration based on grounded or airborne state
+        float accelRate;
+
+        if(Mathf.Abs(targetSpeed) > 0.01f)
+        {
+            accelRate = IsGrounded ? data.groundAcceleration : data.airAcceleration;
+        }
+        else
+        {
+            accelRate = IsGrounded ? data.groundDeceleration : data.airDeceleration;
+        }
+
+        // Calculate difference between current and target speed
+        float speedDiff = targetSpeed - _rb.linearVelocity.x;
+
+        // Calculate and apply force
+        float movement = speedDiff * accelRate;
+
+        _rb.AddForce(movement * Vector2.right);
     }
 
     public void ApplyMovementModifier(Modifier modifier)
     {
-
+        // Placeholder for future implementation.
     }
 }
