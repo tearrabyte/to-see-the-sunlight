@@ -10,10 +10,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Variables
-    public float speed;
-    public float jumpForce;
-    public float gravity;
-    public bool canJump;
+    public PlayerData data;
+    public InputHandler input;
 
     // Methods
     public void Move(Vector2 direction)
