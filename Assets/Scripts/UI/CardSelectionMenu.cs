@@ -11,6 +11,7 @@ public class CardSelectionMenu : MonoBehaviour
 {
     // Variables
     public CardSelectionSystem cardSystem;
+    public Card[] cards;
 
     // Methods
     public void Show()
@@ -37,7 +38,13 @@ public class CardSelectionMenu : MonoBehaviour
     {
         if(cardSystem != null && card != null)
         {
-            cardSystem.SelectCard(card);
+            foreach (Card currentCard in cards)
+            {
+                currentCard.Deselect();
+            }
+            card.Select();
+            cardSystem.selectedCard = card;
+
         }
     }
 }
