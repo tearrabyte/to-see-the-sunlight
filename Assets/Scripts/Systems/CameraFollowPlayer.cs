@@ -36,4 +36,14 @@ public class CameraFollowPlayer : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, clampedPosition, smoothSpeed * Time.deltaTime);
 
     }
+
+    public void TestClampPosition(Vector3 fakeTargetPosition)
+    {
+        Vector3 targetPosition = new Vector3(fakeTargetPosition.x, fakeTargetPosition.y, transform.position.z);
+
+        float clampedX = Mathf.Clamp(targetPosition.x, minBounds.x, maxBounds.x);
+        float clampedY = Mathf.Clamp(targetPosition.y, minBounds.y, maxBounds.y);
+
+        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+    }
 }
