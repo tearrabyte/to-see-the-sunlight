@@ -44,10 +44,19 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded { get; private set; }
     public bool IsTouchingWallFront { get; private set; }
     public bool IsTouchingWallBack { get; private set; }
+    private bool _jumpPressed;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        if(input.JumpPressed)
+        {
+            _jumpPressed = true;
+        }
     }
 
     /* 
@@ -59,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         CheckGrounded();
         CheckWalls();
         HandleMovement();
+        HandleJump();
     }
 
     /* 
@@ -88,6 +98,18 @@ public class PlayerMovement : MonoBehaviour
         _rb.AddForce(movementForce * Vector2.right);
     }
 
+    /* 
+     * JUMP
+     * Applies an instant upward impulse when grounded and jump is pressed.
+     */
+    private void HandleJump()
+    {
+        if(IsGrounded && _jumpPressed)
+        {
+            _rb.AddForce(data.jumpForce * Vector2.up, ForceMode2D.Impulse);
+            _jumpPressed = false;
+        }
+    }
 
     /* 
      * GROUND CHECK
