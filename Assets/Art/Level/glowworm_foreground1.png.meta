@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 6e2cd422dc150e0488c2d8615d986d7e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -604771461677881717
+    second: glow_foreground1_0
+  - first:
+      213: 6653737235998016693
+    second: glow_foreground1_1
+  - first:
+      213: -689004911179399550
+    second: glow_foreground1_2
+  - first:
+      213: -5365540193226825158
+    second: glow_foreground1_3
+  - first:
+      213: -5885352699034581121
+    second: glow_foreground1_4
+  - first:
+      213: 110891209425220092
+    second: glow_foreground1_5
+  - first:
+      213: 6979770721821503464
+    second: glow_foreground1_6
+  - first:
+      213: 1742034168543171790
+    second: glow_foreground1_7
+  - first:
+      213: 8700767429956865976
+    second: glow_foreground1_8
+  - first:
+      213: -2145108910455050819
+    second: glow_foreground1_9
+  - first:
+      213: -6780320741306247955
+    second: glow_foreground1_10
+  - first:
+      213: 3855396194613992258
+    second: glow_foreground1_11
+  - first:
+      213: 406205965158030095
+    second: glow_foreground1_12
+  - first:
+      213: 46149766298714678
+    second: glow_foreground1_13
+  - first:
+      213: -6671716614907657955
+    second: glow_foreground1_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: glow_foreground1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 523
+        width: 229
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8665605f8b6b97f0800000000000000
+      internalID: -604771461677881717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 155
+        width: 17
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b4837c53c2d65c50800000000000000
+      internalID: 6653737235998016693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_2
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 419
+        width: 130
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28ef6ac0fa92076f0800000000000000
+      internalID: -689004911179399550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_3
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 495
+        width: 126
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3262a24f95c985b0800000000000000
+      internalID: -5365540193226825158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_4
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 583
+        width: 118
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f774824f6e6035ea0800000000000000
+      internalID: -5885352699034581121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_5
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 603
+        width: 34
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf1f08aa7f6f98100800000000000000
+      internalID: 110891209425220092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_6
+      rect:
+        serializedVersion: 2
+        x: 1143
+        y: 443
+        width: 110
+        height: 277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8efa7d7bd702dd060800000000000000
+      internalID: 6979770721821503464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 297
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec4db9ab8d2fc2810800000000000000
+      internalID: 1742034168543171790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_8
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 0
+        width: 146
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bf0edff0e55fb870800000000000000
+      internalID: 8700767429956865976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_9
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 0
+        width: 90
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbd2dcbafca0b32e0800000000000000
+      internalID: -2145108910455050819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_10
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 0
+        width: 106
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de45a3f953677e1a0800000000000000
+      internalID: -6780320741306247955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_11
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 0
+        width: 62
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24b1c58896e118530800000000000000
+      internalID: 3855396194613992258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_12
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 0
+        width: 54
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0b93e25c2223a500800000000000000
+      internalID: 406205965158030095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_13
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 0
+        width: 78
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 632c3bac7f4f3a000800000000000000
+      internalID: 46149766298714678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glow_foreground1_14
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 0
+        width: 25
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d118b56461d4963a0800000000000000
+      internalID: -6671716614907657955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      glow_foreground1_0: -604771461677881717
+      glow_foreground1_1: 6653737235998016693
+      glow_foreground1_10: -6780320741306247955
+      glow_foreground1_11: 3855396194613992258
+      glow_foreground1_12: 406205965158030095
+      glow_foreground1_13: 46149766298714678
+      glow_foreground1_14: -6671716614907657955
+      glow_foreground1_2: -689004911179399550
+      glow_foreground1_3: -5365540193226825158
+      glow_foreground1_4: -5885352699034581121
+      glow_foreground1_5: 110891209425220092
+      glow_foreground1_6: 6979770721821503464
+      glow_foreground1_7: 1742034168543171790
+      glow_foreground1_8: 8700767429956865976
+      glow_foreground1_9: -2145108910455050819
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
