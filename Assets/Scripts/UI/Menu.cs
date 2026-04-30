@@ -16,28 +16,29 @@ public abstract class Menu : MonoBehaviour
     public bool isOpen;
     public string menuName;
 
-    
-    // Methods
+    //Methods
 
-    // Sets the menu state to open and activates the UI object.
-    
-    // This also activates the menu game object.
+    /*
+     OPEN
+     Marks the menu as open and activates its game object
+    */
     public virtual void Open()
     {
         isOpen = true;
         gameObject.SetActive(true);
     }
-
-    // Sets the menu state to closed and deactivates the UI object
-
-    // // This also deactivates the menu game object.
+    /*CLOSE
+      Marks the menu as closed and deactivates its game object
+    */
     public virtual void Close()
     {
         isOpen = false;
         gameObject.SetActive(false);
     }
 
-    // Toggles the current active state of the menu.
+    /*TOGGLE
+      Switches the menu between open and closed states
+    */
     public void Toggle()
     {
         if(isOpen) Close();

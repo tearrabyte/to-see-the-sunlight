@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /*
  * MainMenu
@@ -8,35 +7,57 @@ using UnityEngine.SceneManagement;
  * Provides options to start the game, access settings, or quit.
  */
 
-// The logic for the Main Menu buttons includes loading the level and quitting the game.
-
 public class MainMenu : Menu
 {
-    // Methods:
-
-    // Loads the tutorial scene (Glowworm Cave).
+    //game manager is a core, buttons and options panel are swapped depending on what is open now 
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private GameObject Buttons;
+    [SerializeField] private GameObject OptionsPanel;
+    // Methods
+    /*START
+     Ensures the menu begins in the correct default state,
+     with buttons visible and options panel hidden
+    */
+    private void Start()
+    {
+        if (OptionsPanel != null) OptionsPanel.SetActive(false);
+        if (Buttons != null) Buttons.SetActive(true);
+    }
+    /*OPEN
+     Overrides base Open() to reset panel state on every open,
+     preventing options panel from staying between sessions
+    */
+    public override void Open()
+    {
+        base.Open();
+        if (Buttons != null) Buttons.SetActive(true);
+        if (OptionsPanel != null) OptionsPanel.SetActive(false);
+    }
+    //begins the game 
     public void StartGame()
     {
-        // TODO: Call GameManager
-        SceneManager.LoadScene("GlowwormCave");
+        gameManager.StartGame();
     }
-
-    // Placeholder for the Options menu logic to be implemented in Sprint 2.
-
-    // Planned for future implementation; currently acts as a placeholder.
+    /*OPEN SETTINGS
+     Swaps the main buttons out for the options panel
+    */
     public void OpenSettings()
     {
-        // UIManager.Instance.ShowMenu("Options");
-        Debug.Log("Options menu requested.");
-
-        // UIManager.Instance.SwitchMenu(UIManager.Instance.settingsMenu);
+        Buttons.SetActive(false);
+        OptionsPanel.SetActive(true);
     }
-
-    // Closes the application.
-    // Closes the application successfully.
+    /*CLOSE SETTINGS
+     Returns from the options panel back
+    */
+    public void CloseSettings()
+    {
+        Buttons.SetActive(true);
+        OptionsPanel.SetActive(false);
+    }
+    //quits the game 
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Game has exited.");
     }
+
 }
