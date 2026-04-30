@@ -1,16 +1,18 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 /*
  * PlayerData
  * --------------
  * Stores all tunable movement parameters for the player.
- * Used by PlayerMovement to determine movement feel and behaviour.
+ * Used by PlayerMovement to control movement feel and responsiveness.
  */
 
 [CreateAssetMenu(menuName = "Player/Player Data")]
 public class PlayerData : ScriptableObject
 {
-    /* MOVEMENT
+    /*
+     * MOVEMENT
      * Controls horizontal movement behaviour.
      */
     [Header("Movement")]
@@ -22,11 +24,20 @@ public class PlayerData : ScriptableObject
     public float airAcceleration = 30f;
     public float airDeceleration = 20f;
 
-    /* JUMP
-     * Outlines upward force applied during the jump action.
+    /* 
+     * JUMP
+     * Defines upward force and jump responsiveness parameters.
      */
     [Header("Jump")]
     public float jumpForce = 12f;
+
+    /* 
+     * ASSISTS
+     * Movement forgiveness system (jump buffer + coyote time)
+     */
+    [Header("Assists")]
+    [Range(0.01f, 0.5f)] public float jumpBufferTime = 0.075f;
+    [Range(0.01f, 0.5f)] public float coyoteTime = 0.02f;
 
     /*
      * GRAVITY

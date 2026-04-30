@@ -14,52 +14,60 @@ public class InputHandler : MonoBehaviour
      * INPUT ACTIONS
      * References to Input System actions defined in the Input Actions asset.
      */
+    private PlayerInput _playerInput;
     private InputAction _moveAction;
     private InputAction _jumpAction;
 
     /*
      * OUTPUT STATE
-     * Processed input values exposed for use by gameplay systems
+     * Processed input values exposed for gameplay systems.
      */
     public Vector2 MoveInput {  get; private set; }
-    public bool JumpPressed { get; private set; }
-    public bool JumpHeld { get; private set; }
-    public bool JumpReleased { get; private set; }
+    public float LastJumpPressedTime { get; private set; }
 
     private void Awake()
     {
-        PlayerInput playerInput = GetComponent<PlayerInput>();
+        _playerInput = GetComponent<PlayerInput>();
 
-        _moveAction = playerInput.actions.FindAction("Move");
-        _jumpAction = playerInput.actions.FindAction("Jump");
+        _moveAction = _playerInput.actions["Move"];
+        _jumpAction = _playerInput.actions["Jump"];
     }
 
     /* 
-     * ENABLE/DISABLE INPUT ACTIONS
-     * Enables and disables input actions based on active/inactive state of the object
+     * ENABLE / DISABLE
+     * Hooks and unhooks input events.
      */
     private void OnEnable()
     {
         _moveAction.Enable();
         _jumpAction.Enable();
+
+        _jumpAction.started += OnJump;
     }
 
     private void OnDisable()
     {
         _moveAction.Disable();
         _jumpAction.Disable();
+
+        _jumpAction.started -= OnJump;
     }
 
     /*
      * UPDATE
-     * Reads current input state from Input System each frame.
+     * Reads movement input each frame from the Input System.
      */
     private void Update()
     {
         MoveInput = _moveAction.ReadValue<Vector2>();
+    }
 
-        JumpPressed = _jumpAction.WasPressedThisFrame();
-        JumpHeld = _jumpAction.IsPressed();
-        JumpReleased = _jumpAction.WasReleasedThisFrame();
+    /*
+     * JUMP INPUT CALLBACK
+     * Records timestamp for jump buffering logic.
+     */
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        LastJumpPressedTime = Time.time;
     }
 }

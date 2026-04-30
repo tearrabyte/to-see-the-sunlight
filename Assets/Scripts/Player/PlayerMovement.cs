@@ -1,9 +1,12 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 /*
  * PlayerMovement
  * --------------
- * Controls player movement including directional movement and jumping.
+ * Handles horizontal movement and jumping behaviour.
  * Responsible for applying movement-related modifiers such as speed changes.
  */
 
@@ -11,170 +14,189 @@ public class PlayerMovement : MonoBehaviour
 {
     /* 
      * REFERENCES
-     * External systems used by this script (input + data).
+     * External systems required for movement logic.
      */
+    [Header("References")]
     public PlayerData data;
     public InputHandler input;
 
-    /* 
-     * COMPONENTS
-     * Unity components required for player movement.
-     */
     private Rigidbody2D _rb;
 
-    /* 
-     * CHECKS
-     * Provides grounded and wall contact state used by movement logic.
-     */
-    [Header("Ground Check")]
-    [SerializeField] private Transform _groundCheck;
-    [SerializeField] private Vector2 _groundCheckSize = new Vector2(0.8f, 0.15f);
-
-    [Header("Wall Check")]
-    [SerializeField] private Transform _frontWallCheck;
-    [SerializeField] private Transform _backWallCheck;
-    [SerializeField] private Vector2 _wallCheckSize = new Vector2(0.13f, 1.0f);
-
-    public LayerMask groundLayer;
 
     /* 
      * STATE
-     * Runtime flags utilised for movement logic decisions. 
+     * Runtime movement state used for logic and animation integration.
      */
-    public bool IsGrounded { get; private set; }
-    public bool IsTouchingWallFront { get; private set; }
-    public bool IsTouchingWallBack { get; private set; }
-    private bool _jumpPressed;
+    [Header("State")]
+    public bool IsFacingRight {  get; private set; }
+    public bool IsJumping { get; private set; }
+
+    private float _coyoteTimer;
+    private bool _hasJumpBuffered;
+
+    /* 
+     * CHECKS
+     * Physics overlap detection used for grounding and environment queries.
+     */
+    [Header("Checks")]
+    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private Vector2 _groundCheckSize = new Vector2(0.8f, 0.15f);
+
+    [Header("Layers")]
+    [SerializeField] private LayerMask _groundLayer;
+
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        SetGravityScale(data.gravityScale);
+        IsFacingRight = false;
+    }
+
+    /* 
+     * UPDATE
+     * Handles input buffering and non-physics state updates.
+     */
     private void Update()
     {
-        if(input.JumpPressed)
+        // Jump buffer window check
+        if(Time.time - input.LastJumpPressedTime <= data.jumpBufferTime)
         {
-            _jumpPressed = true;
+            _hasJumpBuffered = true;
         }
+
+        CheckGrounded();
+
+        if (input.MoveInput.x != 0)
+        {
+            CheckFacing(input.MoveInput.x > 0);
+        }
+
+        UpdateTimers();
     }
 
     /* 
      * FIXED UPDATE
-     * Runs physics-based movement and environment checks.
+     * Handles physics-based movement and jump execution.
      */
     private void FixedUpdate()
     {
-        CheckGrounded();
-        CheckWalls();
-        HandleMovement();
         HandleJump();
+        HandleMovement();
     }
 
     /* 
      * MOVEMENT
-     * Calculates target horizontal velocity based on input and max speed.
-     * Applies acceleration depending on grounded or airborne state. 
+     * Calculates target horizontal velocity based on input and acceleration rules. 
      */
     private void HandleMovement()
     {
         float targetSpeed = input.MoveInput.x * data.maxSpeed;
 
-        float accelerationRate;
-
-        if(Mathf.Abs(targetSpeed) > 0.01f)
-        {
-            accelerationRate = IsGrounded ? data.groundAcceleration : data.airAcceleration;
-        }
-        else
-        {
-            accelerationRate = IsGrounded ? data.groundDeceleration : data.airDeceleration;
-        }
+        float accelerationRate = Mathf.Abs(targetSpeed) > 0.01f
+            ? (_coyoteTimer > 0 ? data.groundAcceleration : data.airAcceleration)
+            : (_coyoteTimer > 0 ? data.groundDeceleration : data.airDeceleration);
 
         float speedDifference = targetSpeed - _rb.linearVelocity.x;
-
         float movementForce = speedDifference * accelerationRate;
 
         _rb.AddForce(movementForce * Vector2.right);
     }
 
+
     /* 
      * JUMP
-     * Applies an instant upward impulse when grounded and jump is pressed.
+     * Executes jump if buffer and coyote time conditions are met.
      */
     private void HandleJump()
     {
-        if(IsGrounded && _jumpPressed)
-        {
-            _rb.AddForce(data.jumpForce * Vector2.up, ForceMode2D.Impulse);
-            _jumpPressed = false;
-        }
+        if (!_hasJumpBuffered || !CanJump()) return;
+
+        _hasJumpBuffered = false;
+
+        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
+        _rb.AddForce(data.jumpForce * Vector2.up, ForceMode2D.Impulse);
     }
 
     /* 
      * GROUND CHECK
-     * Determines whether the player is currently grounded.
-     * Affects movement control.
+     * Refreshes coyote timer when grounded.
      */
     private void CheckGrounded()
     {
-        IsGrounded = Physics2D.OverlapBox(
-            _groundCheck.position,
-            _groundCheckSize,
-            0f,
-            groundLayer
-            );
+        if(Physics2D.OverlapBox(_groundCheck.position, _groundCheckSize, 0f, _groundLayer))
+        {
+            _coyoteTimer = data.coyoteTime;
+        }
     }
 
-    /*
-     * WALL CHECK
-     * Detects walls on both sides of the player.
-     * Foundation for future wall mechanics (jump, sliding etc.)
+    /* 
+     * TIMERS
+     * Handles decay of temporary movement forgiveness values.
      */
-    private void CheckWalls()
+    public void UpdateTimers()
     {
-        IsTouchingWallFront = Physics2D.OverlapBox(
-            _frontWallCheck.position,
-            _wallCheckSize,
-            0f,
-            groundLayer
-        );
-
-        IsTouchingWallBack = Physics2D.OverlapBox(
-            _backWallCheck.position,
-            _wallCheckSize,
-            0f,
-            groundLayer
-            );
+        _coyoteTimer -= Time.deltaTime;
     }
 
-    /*
-     * DEBUG VISUALS
-     * Draws ground and wall detection bounds.
+    /* 
+     * GRAVITY SETUP
+     * Syncs Rigidbody2D gravity with PlayerData.
      */
-    private void OnDrawGizmosSelected()
+    public void SetGravityScale(float scale)
     {
-        if(_groundCheck != null)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(_groundCheck.position, _groundCheckSize);
-        }
+        _rb.gravityScale = scale;
+    }
 
-        if (_frontWallCheck != null)
+    /* 
+     * PLAYER FACING
+     * Handles sprite orientation based on movement direction.
+     */
+    public void CheckFacing(bool movingRight)
+    {
+        if(movingRight != IsFacingRight)
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(_frontWallCheck.position, _wallCheckSize);
+            Turn();
         }
+    }
 
-        if (_backWallCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(_backWallCheck.position, _wallCheckSize);
-        }
+    private void Turn()
+    {
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+
+        IsFacingRight = !IsFacingRight;
+    }
+
+    /* 
+     * JUMP RULE
+     * Determines whether jump conditions are valid.
+     */
+    private bool CanJump()
+    {
+        return _coyoteTimer > 0;
     }
 
     public void ApplyMovementModifier(Modifier modifier)
     {
         // Placeholder for future implementation.
+    }
+
+    /*
+    * DEBUG VISUALS
+    * Ground detection visualisation.
+    */
+    private void OnDrawGizmosSelected()
+    {
+        if (_groundCheck != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(_groundCheck.position, _groundCheckSize);
+        }
     }
 }
