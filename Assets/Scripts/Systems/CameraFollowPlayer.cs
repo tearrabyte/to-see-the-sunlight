@@ -3,6 +3,7 @@ using UnityEngine;
 public class CameraFollowPlayer : MonoBehaviour
 {
     public Transform target;
+    public PlayerMovement player;
     public float smoothSpeed = 5f; // Change it according to how slow or fast the camera is following
     public float lookAheadDistance = 2f; // Change it according to far the camera shifts left or right
 
@@ -14,16 +15,15 @@ public class CameraFollowPlayer : MonoBehaviour
     // Updates the camera's position after all movements have occured
     private void LateUpdate()
     {
-        if (target == null)
+        if (target == null || player == null)
             return;
 
-        float moveInput = Input.GetAxis("Horizontal");
         // Adjusts look ahead based on the players movement direction
-        if (moveInput > 0)
+        if (player.IsFacingRight)
         {
             currentLookAhead = lookAheadDistance;
         }
-        else if (moveInput < 0)
+        else
         {
             currentLookAhead = -lookAheadDistance;
         }
