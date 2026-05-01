@@ -23,7 +23,10 @@ public class InputHandler : MonoBehaviour
      * Processed input values exposed for gameplay systems.
      */
     public Vector2 MoveInput {  get; private set; }
-    public float LastJumpPressedTime { get; private set; }
+
+    public bool JumpPressed { get; private set; }
+    public bool JumpHeld { get; private set; }
+    public bool JumpReleased {  get; private set; }
 
     private void Awake()
     {
@@ -42,7 +45,8 @@ public class InputHandler : MonoBehaviour
         _moveAction.Enable();
         _jumpAction.Enable();
 
-        _jumpAction.started += OnJump;
+        _jumpAction.started += OnJumpPressed;
+        _jumpAction.canceled += OnJumpReleased;
     }
 
     private void OnDisable()
@@ -50,7 +54,8 @@ public class InputHandler : MonoBehaviour
         _moveAction.Disable();
         _jumpAction.Disable();
 
-        _jumpAction.started -= OnJump;
+        _jumpAction.started -= OnJumpPressed;
+        _jumpAction.canceled -= OnJumpReleased;
     }
 
     /*
@@ -62,12 +67,24 @@ public class InputHandler : MonoBehaviour
         MoveInput = _moveAction.ReadValue<Vector2>();
     }
 
-    /*
-     * JUMP INPUT CALLBACK
-     * Records timestamp for jump buffering logic.
-     */
-    private void OnJump(InputAction.CallbackContext context)
+    private void LateUpdate()
     {
-        LastJumpPressedTime = Time.time;
+        JumpPressed = false;
+        JumpReleased = false;
+    }
+
+    /*
+     * INPUT CALLBACKS
+     */
+    private void OnJumpPressed(InputAction.CallbackContext context)
+    {
+        JumpPressed = true;
+        JumpHeld = true;
+    }
+
+    private void OnJumpReleased(InputAction.CallbackContext context)
+    {
+        JumpHeld = false;
+        JumpReleased = true;
     }
 }

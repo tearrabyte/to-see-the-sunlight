@@ -1,13 +1,16 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
-/*
+/* 
  * PlayerMovement
  * --------------
- * Handles horizontal movement and jumping behaviour.
- * Responsible for applying movement-related modifiers such as speed changes.
+ * Handles 2D character movement including grounded movement, jumping,
+ * and mid-air movement shaping.
+ * 
+ * Jumping uses a velocity-based impulse derived from Physics2D.gravity,
+ * ensuring consistent jump height independent of runtime gravity scaling.
+ * 
+ * GravityScale is used exclusively for mid-air movement shaping (jump cut, apex hang, fast fall).
+ * It does not affect force calculation.
  */
 
 public class PlayerMovement : MonoBehaviour
@@ -22,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rb;
 
-
     /* 
      * STATE
      * Runtime movement state used for logic and animation integration.
@@ -30,9 +32,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("State")]
     public bool IsFacingRight {  get; private set; }
     public bool IsJumping { get; private set; }
+    public bool IsGrounded { get; private set; }
+    public bool IsFalling { get; private set; }
+    public bool IsAirborne { get; private set; }
 
     private float _coyoteTimer;
-    private bool _hasJumpBuffered;
+    private float _jumpBufferTimer;
 
     /* 
      * CHECKS
@@ -53,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        SetGravityScale(data.gravityScale);
+        _rb.gravityScale = data.gravityScale;
         IsFacingRight = false;
     }
 
@@ -63,19 +68,10 @@ public class PlayerMovement : MonoBehaviour
      */
     private void Update()
     {
-        // Jump buffer window check
-        if(Time.time - input.LastJumpPressedTime <= data.jumpBufferTime)
-        {
-            _hasJumpBuffered = true;
-        }
-
+        HandleJumpBuffer();
         CheckGrounded();
-
-        if (input.MoveInput.x != 0)
-        {
-            CheckFacing(input.MoveInput.x > 0);
-        }
-
+        UpdateStates();
+        HandleFacing();
         UpdateTimers();
     }
 
@@ -85,8 +81,10 @@ public class PlayerMovement : MonoBehaviour
      */
     private void FixedUpdate()
     {
-        HandleJump();
         HandleMovement();
+        HandleJump();
+        HandleGravity();
+        ClampFallSpeed();
     }
 
     /* 
@@ -110,28 +108,102 @@ public class PlayerMovement : MonoBehaviour
 
     /* 
      * JUMP
-     * Executes jump if buffer and coyote time conditions are met.
+     * Applies upward velocity based on jumpHeight when buffered input and coyote time conditions are met.
      */
     private void HandleJump()
     {
-        if (!_hasJumpBuffered || !CanJump()) return;
+        if (!CanJump()) return;
 
-        _hasJumpBuffered = false;
+        _jumpBufferTimer = 0f;
+        _coyoteTimer = 0f;
 
-        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
-        _rb.AddForce(data.jumpForce * Vector2.up, ForceMode2D.Impulse);
+        float jumpVelocity = Mathf.Sqrt(2f * Mathf.Abs(Physics2D.gravity.y) * data.jumpHeight);
+
+        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpVelocity);
     }
 
+    /* 
+     * GRAVITY SHAPING
+     * Dynamically modifies Rigidbody gravityScale to control jump feel.
+     */
+    private void HandleGravity()
+    {
+        float yVelocity = _rb.linearVelocity.y;
+        float baseGravity = data.gravityScale;
+        float targetGravity = baseGravity;
+
+        // Jump Cut (early release = higher gravity)
+        if(!input.JumpHeld && yVelocity > 0.01f)
+        {
+            targetGravity = baseGravity * data.jumpCutGravityMultiplier;
+        }
+
+        // Apex Hang Time (low vertical speed while holding jump)
+        else if(input.JumpHeld && Mathf.Abs(yVelocity) < data.apexThreshold)
+        {
+            targetGravity = baseGravity * data.apexGravityMultiplier;
+        }
+
+        // Faster Fall (descending gravity boost)
+        else if(yVelocity < 0f)
+        {
+            targetGravity = baseGravity * data.fallGravityMultiplier;
+        }
+
+        if (_rb.gravityScale != targetGravity)
+        {
+            _rb.gravityScale = targetGravity;
+        }
+    }
+
+    /* 
+    * CLAMP FALL SPEED
+    * Prevents terminal velocity from exceeding design limits for consistent jump/fall feel.
+    */
+    private void ClampFallSpeed()
+    {
+        if(_rb.linearVelocity.y < -data.maxFallSpeed)
+        {
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, -data.maxFallSpeed);
+        }
+    }
+
+
+    /* 
+     * HANDLE JUMP BUFFER
+     * Stores jump input briefly to allow forgiving jump timing.
+     */
+    private void HandleJumpBuffer()
+    {
+        if (input.JumpPressed)
+        {
+            _jumpBufferTimer = data.jumpBufferTime;
+        }
+    }
     /* 
      * GROUND CHECK
      * Refreshes coyote timer when grounded.
      */
     private void CheckGrounded()
     {
-        if(Physics2D.OverlapBox(_groundCheck.position, _groundCheckSize, 0f, _groundLayer))
+        IsGrounded = Physics2D.OverlapBox(_groundCheck.position, _groundCheckSize, 0f, _groundLayer);
+
+        if(IsGrounded)
         {
             _coyoteTimer = data.coyoteTime;
         }
+    }
+
+    /* 
+     * UPDATE STATES
+     * Derives high-level movement state from physics values.
+     * Used for animation.
+     */
+    public void UpdateStates()
+    {
+        IsFalling = !IsGrounded && _rb.linearVelocity.y < -0.1f;
+        IsJumping = !IsGrounded && _rb.linearVelocity.y > 0.1f;
+        IsAirborne = !IsGrounded;
     }
 
     /* 
@@ -141,24 +213,20 @@ public class PlayerMovement : MonoBehaviour
     public void UpdateTimers()
     {
         _coyoteTimer -= Time.deltaTime;
-    }
-
-    /* 
-     * GRAVITY SETUP
-     * Syncs Rigidbody2D gravity with PlayerData.
-     */
-    public void SetGravityScale(float scale)
-    {
-        _rb.gravityScale = scale;
+        _jumpBufferTimer -= Time.deltaTime;
     }
 
     /* 
      * PLAYER FACING
      * Handles sprite orientation based on movement direction.
      */
-    public void CheckFacing(bool movingRight)
+    public void HandleFacing()
     {
-        if(movingRight != IsFacingRight)
+        if (input.MoveInput.x == 0) return;
+
+        bool movingRight = input.MoveInput.x > 0f;
+
+        if (movingRight != IsFacingRight)
         {
             Turn();
         }
@@ -179,7 +247,7 @@ public class PlayerMovement : MonoBehaviour
      */
     private bool CanJump()
     {
-        return _coyoteTimer > 0;
+        return _jumpBufferTimer > 0f && _coyoteTimer > 0f;
     }
 
     public void ApplyMovementModifier(Modifier modifier)

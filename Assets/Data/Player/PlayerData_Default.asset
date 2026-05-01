@@ -12,12 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a3c2333635608419ff9d8d4de87f49, type: 3}
   m_Name: PlayerData_Default
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  maxSpeed: 10
-  groundAcceleration: 50
-  groundDeceleration: 50
-  airAcceleration: 30
-  airDeceleration: 20
+  maxSpeed: 7
+  groundAcceleration: 25
+  groundDeceleration: 25
+  airAcceleration: 15
+  airDeceleration: 10
   jumpForce: 12
-  jumpBufferTime: 0
+  jumpCutGravityMultiplier: 3
+  jumpBufferTime: 0.075
+  coyoteTime: 0.05
   gravityScale: 3
-  maxFallSpeed: 20
+  maxFallSpeed: 25
+  fallGravityMultiplier: 2.5
+  apexThreshold: 0.125
+  apexGravityMultiplier: 0.7
