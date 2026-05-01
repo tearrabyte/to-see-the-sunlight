@@ -275,4 +275,19 @@ public class PlayerMovement : MonoBehaviour
             Gizmos.DrawWireCube(_groundCheck.position, _groundCheckSize);
         }
     }
+
+    /*
+    * UNIT TEST HELPERS
+    */
+#if UNITY_INCLUDE_TESTS
+    public bool CanJumpTest(float jumpBuffer, float coyote)
+    {
+        return jumpBuffer > 0f && coyote > 0f;
+    }
+
+    public float TargetSpeedTest(float input, float maxSpeed)
+    {
+        return input * maxSpeed;
+    }
+#endif
 }
