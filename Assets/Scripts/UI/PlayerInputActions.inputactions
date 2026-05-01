@@ -4,11 +4,13 @@
     "maps": [
         {
             "name": "UI",
+            "id": "be0428a7-9cab-4ca7-ba6d-97cf88a2b6eb",
             "id": "fabc324e-c0e0-4be1-b1a7-f9e46decb4fd",
             "actions": [
                 {
                     "name": "New action",
                     "type": "Button",
+                    "id": "e0767286-c6d9-43c1-a696-85f3e7e6c196",
                     "id": "a3375e1a-2b69-45b1-9735-fae2a6c2602e",
                     "expectedControlType": "",
                     "processors": "",
@@ -16,6 +18,9 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "fbb9382f-9c45-4ed9-88f9-89824eab9e06",
                     "name": "Navigate",
                     "type": "Value",
                     "id": "b48ee476-4f8b-4f6f-84b6-84358504b3c8",
@@ -37,6 +42,7 @@
             "bindings": [
                 {
                     "name": "",
+                    "id": "b8d85fd1-63d8-4b92-a751-4cf83902a007",
                     "id": "1999ffad-96ef-4a06-ade0-def341a67382",
                     "path": "",
                     "interactions": "",
@@ -48,6 +54,23 @@
                 },
                 {
                     "name": "",
+                    "id": "e31338f3-fcad-4920-871a-6e84361b65ac",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bfc15698-110f-4f95-ae88-0aabc86c4a7d",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "id": "8248067d-570f-465e-8d24-67e5ab343cee",
                     "path": "",
                     "interactions": "",
