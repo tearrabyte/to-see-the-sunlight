@@ -62,4 +62,7 @@ public class PlayerData : ScriptableObject
 
     [Range(0.0f, 0.3f)] public float apexThreshold = 0.15f;
     [Range(0.5f, 1.0f)] public float apexGravityMultiplier = 0.5f;
+    [Range(0.5f, 2.0f)] public float apexAccelerationMultiplier = 1.25f;
+    [Range(0.5f, 2.0f)] public float apexSpeedMultiplier = 1.1f;
+
 }

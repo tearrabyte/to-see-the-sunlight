@@ -95,14 +95,22 @@ public class PlayerMovement : MonoBehaviour
     {
         float targetSpeed = input.MoveInput.x * data.maxSpeed;
 
+        bool isApex = !IsGrounded && Mathf.Abs(_rb.linearVelocity.y) < data.apexThreshold;
+
         float accelerationRate = Mathf.Abs(targetSpeed) > 0.01f
             ? (_coyoteTimer > 0 ? data.groundAcceleration : data.airAcceleration)
             : (_coyoteTimer > 0 ? data.groundDeceleration : data.airDeceleration);
 
-        float speedDifference = targetSpeed - _rb.linearVelocity.x;
-        float movementForce = speedDifference * accelerationRate;
+        if(isApex)
+        {
+            accelerationRate *= data.apexAccelerationMultiplier;
+            targetSpeed *= data.apexSpeedMultiplier;
+        }
 
-        _rb.AddForce(movementForce * Vector2.right);
+        float smoothFactor = 1f - Mathf.Exp(-accelerationRate * Time.fixedDeltaTime);
+        float horizontalVelocity = Mathf.Lerp(_rb.linearVelocity.x, targetSpeed, smoothFactor);
+
+        _rb.linearVelocity = new Vector2(horizontalVelocity, _rb.linearVelocity.y);
     }
 
 
