@@ -17,12 +17,14 @@ MonoBehaviour:
   groundDeceleration: 25
   airAcceleration: 15
   airDeceleration: 10
-  jumpForce: 12
-  jumpCutGravityMultiplier: 3
+  jumpHeight: 6.5
   jumpBufferTime: 0.075
   coyoteTime: 0.05
   gravityScale: 3
-  maxFallSpeed: 25
+  maxFallSpeed: 20
+  jumpCutGravityMultiplier: 3
   fallGravityMultiplier: 2.5
-  apexThreshold: 0.125
-  apexGravityMultiplier: 0.7
+  apexThreshold: 0.15
+  apexGravityMultiplier: 0.5
+  apexAccelerationMultiplier: 1.2
+  apexSpeedMultiplier: 1.05
