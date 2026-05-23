@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EndLevelTrigger : MonoBehaviour
 {
-    // The name of the scene to load when the player reaches the end of the level
-    public string nextSceneName;
-
+    // The location where the player will be teleported when they enter the trigger
+    [SerializeField] private Transform teleportLocation;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,16 +11,18 @@ public class EndLevelTrigger : MonoBehaviour
 
         if (player != null)
         {
-            // Checks to see if the next scene exists before goign to load into it
-            if (Application.CanStreamedLevelBeLoaded(nextSceneName))
+            // Gets the players Rigidbody2D component
+            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+
+            // Makes sure the players movement stops before teleporting
+            if (rb != null)
             {
-                SceneManager.LoadScene(nextSceneName);
+                rb.linearVelocity = Vector2.zero;
             }
-            else
-            {
-                // Reloads the current scene if the next scene doesn't exist
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
+
+            // Teleports the player to the start point of the next level
+            player.transform.position = teleportLocation.position;
+
         }
     }
 }
