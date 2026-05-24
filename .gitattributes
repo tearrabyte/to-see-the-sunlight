@@ -1,0 +1,155 @@
+# Git attributes for Unity projects 
+
+ 
+
+# Ensure that text files introduced to the repository have normalized line endings 
+
+* text=auto 
+
+ 
+
+# Increase probability of success for merging C# files 
+
+*.cs text diff=csharp 
+
+ 
+
+# Unity YAML assets 
+
+[attr]unity-yaml merge=unityyamlmerge eol=lf linguist-language=yaml linguist-generated 
+
+ 
+
+# Unity JSON assets 
+
+[attr]unity-json eol=lf linguist-language=json 
+
+ 
+
+# Unity Shader / Rendering Files 
+
+*.shader 		text linguist-detectable=false  
+
+*.cginc 		text linguist-detectable=false  
+
+*.hlsl 			text linguist-detectable=false  
+
+*.glsl 			text linguist-detectable=false  
+
+*.compute 		text linguist-detectable=false  
+
+*.raytrace 		text linguist-detectable=false 
+
+ 
+
+# Unity JSON Files 
+
+*.asmdef 		    unity-json  
+
+*.asmref 		    unity-json  
+
+*.index 			unity-json  
+
+*.inputactions 		unity-json  
+
+*.shadergraph 		unity-json  
+
+*.shadersubgraph 	unity-json 
+
+ 
+
+# Unity UI Toolkit Files 
+
+*.tss 			text diff=css linguist-language=css  
+
+*.uss 			text diff=css linguist-language=css  
+
+*.uxml 			text linguist-language=xml linguist-detectable 
+
+ 
+
+# Unity YAML Asset Files 
+
+*.anim 			        unity-yaml  
+
+*.asset 			    unity-yaml  
+
+*.brush 			    unity-yaml  
+
+*.controller 		    unity-yaml 
+
+*.flare 			    unity-yaml  
+
+*.fontsettings 		    unity-yaml  
+
+*.giparams 		        unity-yaml  
+
+*.guiskin 		        unity-yaml  
+
+*.lighting 		        unity-yaml  
+
+*.mask 			        unity-yaml  
+
+*.mat 			        unity-yaml  
+
+*.meta 			        unity-yaml  
+
+*.mixer 			    unity-yaml  
+
+*.overrideController 	unity-yaml  
+
+*.playable 		        unity-yaml  
+
+*.prefab 			    unity-yaml  
+
+*.preset 			    unity-yaml  
+
+*.renderTexture 		unity-yaml  
+
+*.scenetemplate 		unity-yaml 
+
+*.shadervariants 		unity-yaml  
+
+*.signal 			    unity-yaml  
+
+*.spriteatlas 		    unity-yaml  
+
+*.spriteatlasv2 		unity-yaml  
+
+*.terrainlayer 		    unity-yaml  
+
+*.unity 			    unity-yaml 
+
+*.physicsMaterial2D 	unity-yaml 
+
+ 
+
+# Generated / Vendor Files 
+
+# Third-party plugins 
+
+Assets/Plugins/** 			    linguist-generated 
+
+ 
+
+# TextMeshPro imported assets 
+
+Assets/TextMesh Pro/** 		    linguist-vendored 
+
+ 
+
+# Unity package lock file 
+
+Packages/packages-lock.json 	linguist-generated 
+
+ 
+
+# Special Cases 
+
+# Unity baked lighting data 
+
+LightingData.asset binary 
+
+ 
+
+ 
