@@ -10,13 +10,52 @@ using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
-    // Variables
+    /* 
+     * REFERENCES
+     * Visual and gameplay systems required for player rendering and animation
+     */
+    [Header("References")]
     public SpriteRenderer spriteRenderer;
+    public Animator animator;
+    public PlayerMovement movement;
+
+
+    /* 
+     * VISUAL EFFECTS
+     * Runtime modifier-driven visual effects.
+     */
+    [Header("Effects")]
     public List<Modifier> currentEffects = new List<Modifier>();
-    public Player player;
+
+
+    /* 
+     * VISION
+     * Controls player visibility in different biome environments.
+     */
+    [Header("Vision")]
     public float visionRadius;
 
-    // Methods
+
+    private void Update()
+    {
+        UpdateAnimations();
+    }
+
+
+    /* 
+     * ANIMATION
+     * Updates animator parameters based on movement state.
+     */
+    public void UpdateAnimations()
+    {
+        if (movement == null || animator == null) return;
+
+        float speed = Mathf.Abs(movement.GetComponent<Rigidbody2D>().linearVelocity.x);
+
+        animator.SetFloat("Speed", speed);
+        animator.SetBool("IsGrounded", movement.IsGrounded);
+    }
+
     public void UpdateVisualEffects()
     {
 
