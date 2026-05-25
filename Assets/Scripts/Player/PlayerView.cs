@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 /*
  * PlayerView
@@ -39,6 +40,7 @@ public class PlayerView : MonoBehaviour
     private void Update()
     {
         UpdateAnimations();
+        UpdateFacing();
     }
 
 
@@ -50,10 +52,21 @@ public class PlayerView : MonoBehaviour
     {
         if (movement == null || animator == null) return;
 
-        float speed = Mathf.Abs(movement.GetComponent<Rigidbody2D>().linearVelocity.x);
+        float speed = Mathf.Abs(movement.Velocity.x);
 
         animator.SetFloat("Speed", speed);
         animator.SetBool("IsGrounded", movement.IsGrounded);
+    }
+
+    /* 
+     * FACING
+     * Handles sprite orientation based on movement direction.
+     */
+    public void UpdateFacing()
+    {
+        if (movement == null || spriteRenderer == null) return;
+
+        spriteRenderer.flipX = !movement.IsFacingRight;
     }
 
     public void UpdateVisualEffects()
