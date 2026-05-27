@@ -32,6 +32,15 @@ public class ModifierManager : MonoBehaviour
             activeModifiers.Add(modifier);
 
             // Route to correct method based on type.
+            if(modifier.type == ModifierType.Movement)
+            {
+                PlayerMovement movement = GetComponent<PlayerMovement>();
+
+                if(modifier.movementModifierType == MovementModifierType.DoubleJump)
+                {
+                    movement.EnableDoubleJump();
+                }
+            }
 
             onModifiersChanged?.Invoke();
         }

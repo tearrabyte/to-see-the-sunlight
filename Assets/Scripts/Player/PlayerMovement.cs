@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     private float _coyoteTimer;
     private float _jumpBufferTimer;
 
+    private int _maxAirJumps;
+
     /* 
      * CHECKS
      * Physics overlap detection used for grounding and environment queries.
@@ -258,10 +260,14 @@ public class PlayerMovement : MonoBehaviour
         return _jumpBufferTimer > 0f && _coyoteTimer > 0f;
     }
 
-    public void ApplyMovementModifier(Modifier modifier)
+    /*
+    * ENABLE DOUBLE JUMP
+    */
+    public void EnableDoubleJump()
     {
-        // Placeholder for future implementation.
+        _maxAirJumps = 1;
     }
+
 
     /*
     * DEBUG VISUALS
@@ -290,4 +296,10 @@ public class PlayerMovement : MonoBehaviour
         return input * maxSpeed;
     }
 #endif
+
+
+    /*
+     * PUBLIC API
+    */
+    public int MaxAirJumps => _maxAirJumps;
 }
