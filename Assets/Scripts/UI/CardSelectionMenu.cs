@@ -13,6 +13,8 @@ public class CardSelectionMenu : MonoBehaviour
     public CardSelectionSystem cardSystem;
     public Card[] cards;
 
+    private Card pendingCard;
+
     // Methods
     public void Show()
     {
@@ -31,20 +33,32 @@ public class CardSelectionMenu : MonoBehaviour
 
     public void RevealCards()
     {
-
+        foreach (Card card in cards)
+        {
+            card.Reveal();
+        }
     }
 
     public void SelectCard(Card card)
     {
-        if(cardSystem != null && card != null)
+        if (card != null)
         {
             foreach (Card currentCard in cards)
             {
                 currentCard.Deselect();
             }
-            card.Select();
-            cardSystem.selectedCard = card;
 
+            pendingCard = card;
+            card.Select();
+        }
+    }
+
+    public void ConfirmSelectedCard()
+    {
+        if (cardSystem != null && pendingCard != null)
+        {
+            RevealCards();
+            cardSystem.SelectCard(pendingCard);
         }
     }
 }
