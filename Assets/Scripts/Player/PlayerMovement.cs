@@ -128,6 +128,11 @@ public class PlayerMovement : MonoBehaviour
         _jumpBufferTimer = 0f;
         _coyoteTimer = 0f;
 
+        if(!IsGrounded)
+        {
+            UseAirJump();
+        }
+
         float jumpVelocity = Mathf.Sqrt(2f * Mathf.Abs(Physics2D.gravity.y) * data.jumpHeight);
 
         _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpVelocity);
@@ -202,6 +207,7 @@ public class PlayerMovement : MonoBehaviour
         if(IsGrounded)
         {
             _coyoteTimer = data.coyoteTime;
+            ResetAirJumps();
         }
     }
 
@@ -258,7 +264,11 @@ public class PlayerMovement : MonoBehaviour
      */
     private bool CanJump()
     {
-        return _jumpBufferTimer > 0f && _coyoteTimer > 0f;
+        bool groundedJump = _jumpBufferTimer > 0f && _coyoteTimer > 0f;
+
+        bool airJump = _jumpBufferTimer > 0f && !IsGrounded && CanUseAirJump();
+
+        return groundedJump || airJump;
     }
 
     /*
@@ -268,6 +278,33 @@ public class PlayerMovement : MonoBehaviour
     {
         _maxAirJumps = 1;
         _airJumpsRemaining = 1;
+    }
+
+    /*
+    * DOUBLE JUMP RULE
+    */
+    public bool CanUseAirJump()
+    {
+        return _airJumpsRemaining > 0;
+    }
+
+    /*
+    * CONSUME DOUBLE JUMP
+    */
+    public void UseAirJump()
+    {
+        if (_airJumpsRemaining > 0)
+        {
+            _airJumpsRemaining--;
+        }
+    }
+
+    /*
+    * RESET DOUBLE JUMP
+    */
+    public void ResetAirJumps()
+    {
+        _airJumpsRemaining = _maxAirJumps;
     }
 
 
@@ -296,19 +333,6 @@ public class PlayerMovement : MonoBehaviour
     public float TargetSpeedTest(float input, float maxSpeed)
     {
         return input * maxSpeed;
-    }
-
-    public bool CanUseAirJump()
-    {
-        return _airJumpsRemaining > 0;
-    }
-
-    public void UseAirJump()
-    {
-        if(_airJumpsRemaining > 0)
-        {
-            _airJumpsRemaining--;
-        }
     }
 #endif
 

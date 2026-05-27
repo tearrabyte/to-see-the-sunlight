@@ -72,4 +72,37 @@ public class PlayerDoubleJumpTests
 
         Object.DestroyImmediate(player);
     }
+
+    [Test]
+    public void Landing_Resets_Air_Jumps()
+    {
+        var player = new GameObject();
+
+        var movement = player.AddComponent<PlayerMovement>();
+
+        movement.EnableDoubleJump();
+        movement.UseAirJump();
+
+        movement.ResetAirJumps();
+        Assert.AreEqual(1, movement.AirJumpsRemaining);
+
+        Object.DestroyImmediate(player);
+    }
+
+    [Test]
+    public void AirJump_Cannot_Be_Used_Infinitely()
+    {
+        var player = new GameObject();
+
+        var movement = player.AddComponent<PlayerMovement>();
+
+        movement.EnableDoubleJump();
+        movement.UseAirJump();
+
+        movement.UseAirJump();
+
+        Assert.AreEqual(0, movement.AirJumpsRemaining);
+
+        Object.DestroyImmediate(player);
+    }
 }
