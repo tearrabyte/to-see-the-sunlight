@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpBufferTimer;
 
     private int _maxAirJumps;
+    private int _airJumpsRemaining;
 
     /* 
      * CHECKS
@@ -266,6 +267,7 @@ public class PlayerMovement : MonoBehaviour
     public void EnableDoubleJump()
     {
         _maxAirJumps = 1;
+        _airJumpsRemaining = 1;
     }
 
 
@@ -295,6 +297,19 @@ public class PlayerMovement : MonoBehaviour
     {
         return input * maxSpeed;
     }
+
+    public bool CanUseAirJump()
+    {
+        return _airJumpsRemaining > 0;
+    }
+
+    public void UseAirJump()
+    {
+        if(_airJumpsRemaining > 0)
+        {
+            _airJumpsRemaining--;
+        }
+    }
 #endif
 
 
@@ -302,4 +317,5 @@ public class PlayerMovement : MonoBehaviour
      * PUBLIC API
     */
     public int MaxAirJumps => _maxAirJumps;
+    public int AirJumpsRemaining => _airJumpsRemaining;
 }

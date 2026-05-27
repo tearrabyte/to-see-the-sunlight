@@ -41,4 +41,35 @@ public class PlayerDoubleJumpTests
         Object.DestroyImmediate(player);
     }
 
+    [Test]
+    public void AirJump_Is_Consumed_On_Use()
+    {
+        var player = new GameObject();
+
+        var movement = player.AddComponent<PlayerMovement>();
+
+        movement.EnableDoubleJump();
+        movement.UseAirJump();
+
+        Assert.AreEqual(0, movement.AirJumpsRemaining);
+
+        Object.DestroyImmediate(player);
+    }
+
+    [Test]
+    public void Player_Cannot_AirJump_When_None_Remain()
+    {
+        var player = new GameObject();
+
+        var movement = player.AddComponent<PlayerMovement>();
+
+        movement.EnableDoubleJump();
+        movement.UseAirJump();
+
+        bool canUseAirJump = movement.CanUseAirJump();
+
+        Assert.IsFalse(canUseAirJump);
+
+        Object.DestroyImmediate(player);
+    }
 }
