@@ -56,6 +56,8 @@ public class PlayerView : MonoBehaviour
 
         animator.SetFloat("Speed", speed);
         animator.SetBool("IsGrounded", movement.IsGrounded);
+        animator.SetBool("IsJumping", movement.IsJumping);
+        animator.SetBool("IsFalling", movement.IsFalling);
     }
 
     /* 
@@ -66,7 +68,7 @@ public class PlayerView : MonoBehaviour
     {
         if (movement == null || spriteRenderer == null) return;
 
-        spriteRenderer.flipX = !movement.IsFacingRight;
+        spriteRenderer.flipX = movement.IsFacingRight;
     }
 
     public void UpdateVisualEffects()

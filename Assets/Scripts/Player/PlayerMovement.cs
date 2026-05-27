@@ -209,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
      */
     public void UpdateStates()
     {
-        IsFalling = !IsGrounded && _rb.linearVelocity.y < -0.1f;
+        IsFalling = !IsGrounded && _rb.linearVelocity.y < -0.25f;
         IsJumping = !IsGrounded && _rb.linearVelocity.y > 0.1f;
         IsAirborne = !IsGrounded;
 
