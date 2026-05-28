@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
+using UnityEngine.Rendering.Universal;
 
 /*
  * PlayerView
@@ -34,8 +34,13 @@ public class PlayerView : MonoBehaviour
      * Controls player visibility in different biome environments.
      */
     [Header("Vision")]
-    public float visionRadius;
+    public Light2D visionLight;
+    [SerializeField] private float visionRadius;
 
+    private void Start()
+    {
+        InitialiseVision();
+    }
 
     private void Update()
     {
@@ -69,6 +74,43 @@ public class PlayerView : MonoBehaviour
         if (movement == null || spriteRenderer == null) return;
 
         spriteRenderer.flipX = movement.IsFacingRight;
+    }
+
+
+    /* 
+     * VISION
+     * Controls runtime player visibility behaviour and light state.
+     */
+    private void InitialiseVision()
+    {
+        if (movement == null || movement.data == null || visionLight == null) return;
+
+        visionRadius = movement.data.defaultVisionRadius;
+        visionLight.shapeLightFalloffSize = visionRadius;
+    }
+
+    /* 
+     * ENABLE VISION
+     * Enables the player vision light.
+     */
+    public void EnableVision()
+    {
+        if (visionLight != null)
+        {
+            visionLight.enabled = true;
+        }
+    }
+
+    /* 
+     * DISABLE VISION
+     * Disables the player vision light.
+     */
+    public void DisableVision()
+    {
+        if(visionLight != null)
+        {
+            visionLight.enabled = false;
+        }
     }
 
     public void UpdateVisualEffects()

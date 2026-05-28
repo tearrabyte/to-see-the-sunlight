@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 /*
@@ -34,6 +33,7 @@ public class PlayerData : ScriptableObject
      */
     [Header("Jump")]
     [Range(0.0f, 10.0f)] public float jumpHeight = 6.5f;
+    
     /* 
      * ASSISTS
      * Movement forgiveness system (jump buffer + coyote time)
@@ -65,4 +65,10 @@ public class PlayerData : ScriptableObject
     [Range(0.5f, 2.0f)] public float apexAccelerationMultiplier = 1.25f;
     [Range(0.5f, 2.0f)] public float apexSpeedMultiplier = 1.1f;
 
+    /* 
+     * VISION
+     * Controls player visibility radius in biome darkness.
+     */
+    [Header("Vision")]
+    [Range(0f, 10f)] public float defaultVisionRadius = 3f;
 }
