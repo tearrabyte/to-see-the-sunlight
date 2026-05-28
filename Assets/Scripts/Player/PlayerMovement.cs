@@ -1,3 +1,4 @@
+using UnityEditorInternal;
 using UnityEngine;
 
 /* 
@@ -71,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
         HandleJumpBuffer();
         CheckGrounded();
         UpdateStates();
-        HandleFacing();
         UpdateTimers();
     }
 
@@ -209,9 +209,16 @@ public class PlayerMovement : MonoBehaviour
      */
     public void UpdateStates()
     {
-        IsFalling = !IsGrounded && _rb.linearVelocity.y < -0.1f;
+        IsFalling = !IsGrounded && _rb.linearVelocity.y < -0.25f;
         IsJumping = !IsGrounded && _rb.linearVelocity.y > 0.1f;
         IsAirborne = !IsGrounded;
+
+        // Direction Facing
+        float inputX = input.MoveInput.x;
+        if (Mathf.Abs(inputX) > 0.01f)
+        {
+            IsFacingRight = inputX > 0f;
+        }
     }
 
     /* 
@@ -222,31 +229,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _coyoteTimer -= Time.deltaTime;
         _jumpBufferTimer -= Time.deltaTime;
-    }
-
-    /* 
-     * PLAYER FACING
-     * Handles sprite orientation based on movement direction.
-     */
-    public void HandleFacing()
-    {
-        if (input.MoveInput.x == 0) return;
-
-        bool movingRight = input.MoveInput.x > 0f;
-
-        if (movingRight != IsFacingRight)
-        {
-            Turn();
-        }
-    }
-
-    private void Turn()
-    {
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
-
-        IsFacingRight = !IsFacingRight;
     }
 
     /* 
@@ -290,4 +272,10 @@ public class PlayerMovement : MonoBehaviour
         return input * maxSpeed;
     }
 #endif
+
+
+    /*
+    * PUBLIC API (View/Camera etc.)
+    */
+    public Vector2 Velocity => _rb.linearVelocity;
 }
