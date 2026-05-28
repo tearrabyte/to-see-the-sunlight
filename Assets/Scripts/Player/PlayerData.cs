@@ -71,4 +71,7 @@ public class PlayerData : ScriptableObject
      */
     [Header("Vision")]
     [Range(0f, 10f)] public float defaultVisionRadius = 3f;
+    [Range(0f, 10f)] public float reducedVisionRadius = 1f;
+    [Range(0f, 10f)] public float increasedVisionRadius = 5f;
+
 }

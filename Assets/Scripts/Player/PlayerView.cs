@@ -113,6 +113,18 @@ public class PlayerView : MonoBehaviour
         }
     }
 
+    /* 
+    * UPDATE VISION
+    * Adjusts the radius of the player vision light.
+    */
+    public void UpdateVisionRadius(float radius)
+    {
+        if(visionLight == null) return;
+
+        visionRadius = radius;
+        visionLight.shapeLightFalloffSize = visionRadius;
+    }
+
     public void UpdateVisualEffects()
     {
 
@@ -128,8 +140,4 @@ public class PlayerView : MonoBehaviour
 
     }
 
-    public void UpdateVisionRadius()
-    {
-
-    }
 }

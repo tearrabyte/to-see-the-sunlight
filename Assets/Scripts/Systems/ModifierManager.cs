@@ -61,6 +61,21 @@ public class ModifierManager : MonoBehaviour
                     movement.EnableDoubleJump();
                 }
             }
+            
+            // Vision Modifiers
+            if(modifier.type == ModifierType.Vision)
+            {
+                PlayerView view = GetComponent<PlayerView>();
+
+                if(modifier.visionModifierType == VisionModifierType.Blindness)
+                {
+                    view.UpdateVisionRadius(player.movement.data.reducedVisionRadius);
+                }
+                else if(modifier.visionModifierType== VisionModifierType.GlowwormLantern)
+                {
+                    view.UpdateVisionRadius(player.movement.data.increasedVisionRadius);
+                }
+            }
 
             onModifiersChanged?.Invoke();
         }
@@ -77,6 +92,13 @@ public class ModifierManager : MonoBehaviour
         {
             activeModifiers.Remove(modifier);
             onModifiersChanged?.Invoke();
+
+            if(modifier.type == ModifierType.Vision)
+            {
+                PlayerView view = GetComponent<PlayerView>();
+
+                view.UpdateVisionRadius(player.movement.data.defaultVisionRadius);
+            }
         }
     }
 

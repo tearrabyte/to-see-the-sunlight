@@ -5708,12 +5708,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &161606338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4037961544836486509, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
+  m_PrefabInstance: {fileID: 1974787515}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &161606339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8416431693308505384, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
+  m_PrefabInstance: {fileID: 1974787515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161606338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2eebb846e437754686f882b71545378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!114 &161606343 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1393767655709923676, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
   m_PrefabInstance: {fileID: 1974787515}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 161606338}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 378de95cf3644d74597d27bc5e3657a8, type: 3}
@@ -5724,6 +5740,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5829931231721167616, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
   m_PrefabInstance: {fileID: 1974787515}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &161606348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161606338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43c39669de72bc44b0f86d28a643394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ModifierManager
+  player: {fileID: 161606339}
+  activeModifiers: []
 --- !u!1 &164763821
 GameObject:
   m_ObjectHideFlags: 0
@@ -72506,6 +72536,10 @@ PrefabInstance:
       propertyPath: visionLight
       value: 
       objectReference: {fileID: 331011777}
+    - target: {fileID: 304222946600196527, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
+      propertyPath: visionRadius
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1399161379801989809, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
       propertyPath: m_SortingOrder
       value: 10
@@ -72558,10 +72592,37 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5895677281636753469, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
+      propertyPath: m_ShapeLightFalloffSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895677281636753469, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
+      propertyPath: m_LocalBounds.m_Center.x
+      value: 0.00080013275
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895677281636753469, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
+      propertyPath: m_LocalBounds.m_Center.y
+      value: -0.0011000633
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895677281636753469, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.x
+      value: 5.499
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895677281636753469, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.y
+      value: 5.4989
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416431693308505384, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
+      propertyPath: modifierManager
+      value: 
+      objectReference: {fileID: 161606348}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4037961544836486509, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 161606348}
   m_SourcePrefab: {fileID: 100100000, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
 --- !u!1 &1978414730
 GameObject:
