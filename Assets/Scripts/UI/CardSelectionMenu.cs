@@ -13,6 +13,8 @@ public class CardSelectionMenu : MonoBehaviour
     public CardSelectionSystem cardSystem;
     public Card[] cards;
 
+    public GameObject cardMenuPanel;
+
     private Card pendingCard;
 
     // Methods
@@ -23,7 +25,7 @@ public class CardSelectionMenu : MonoBehaviour
 
     public void Hide()
     {
-
+        cardMenuPanel.SetActive(false);
     }
 
     public void DisplayCards()
@@ -59,6 +61,7 @@ public class CardSelectionMenu : MonoBehaviour
         {
             RevealCards();
             cardSystem.SelectCard(pendingCard);
+            Hide();
         }
     }
 }
