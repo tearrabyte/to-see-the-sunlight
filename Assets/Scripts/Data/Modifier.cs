@@ -15,12 +15,18 @@ public enum ModifierType
     Environment
 }
 
+public enum MovementModifierType
+{
+    DoubleJump,
+}
+
 [System.Serializable]
 public class Modifier
 {
-    public string name;
-    public string description;
     public ModifierType type;
+    public string description;
+
+    public MovementModifierType movementModifierType;
 
     public float effectValue;
 

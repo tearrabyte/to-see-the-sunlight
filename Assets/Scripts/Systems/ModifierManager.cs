@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
 
 /*
@@ -12,31 +11,66 @@ using UnityEngine;
 
 public class ModifierManager : MonoBehaviour
 {
-    // Variables
-    public List<Modifier> activeModifiers = new List<Modifier>();
+    /* 
+     * REFERENCES
+     * External systems affected by modifiers
+     */
     public Player player;
 
-    // Events
+    /* 
+     * STATE
+     * Runtime collection of currently active modifiers
+     */
+    public List<Modifier> activeModifiers = new List<Modifier>();
+
+
+    /* 
+     * EVENTS
+     * Invoked whenever modifier state changes.
+     */
     public Action onModifiersChanged;
 
-    // Methods
+
+    /* 
+     * ACTIVE MODIFIERS
+     * Returns all currently active modifiers.
+     */
     public List<Modifier> GetActiveModifiers()
     {
         return activeModifiers;
     }
 
+
+    /* 
+     * APPLY MODIFIER
+     * Adds a modifier and applies its gameplay effect
+     */
     public void ApplyModifier(Modifier modifier)
     {
         if(modifier != null)
         {
             activeModifiers.Add(modifier);
 
-            // Route to correct method based on type.
+            // Movement Modifiers
+            if(modifier.type == ModifierType.Movement)
+            {
+                PlayerMovement movement = GetComponent<PlayerMovement>();
+
+                if(modifier.movementModifierType == MovementModifierType.DoubleJump)
+                {
+                    movement.EnableDoubleJump();
+                }
+            }
 
             onModifiersChanged?.Invoke();
         }
-    }    
-    
+    }
+
+
+    /* 
+     * REMOVE MODIFIER
+     * Removes a modifier from the active modifier list.
+     */
     public void RemoveModifier(Modifier modifier)
     {
         if (modifier != null)

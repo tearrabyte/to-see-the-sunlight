@@ -1,3 +1,4 @@
+using UnityEditorInternal;
 using UnityEngine;
 
 /* 
@@ -39,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
     private float _coyoteTimer;
     private float _jumpBufferTimer;
 
+    private int _maxAirJumps;
+    private int _airJumpsRemaining;
+
     /* 
      * CHECKS
      * Physics overlap detection used for grounding and environment queries.
@@ -71,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
         HandleJumpBuffer();
         CheckGrounded();
         UpdateStates();
-        HandleFacing();
         UpdateTimers();
     }
 
@@ -124,6 +127,11 @@ public class PlayerMovement : MonoBehaviour
 
         _jumpBufferTimer = 0f;
         _coyoteTimer = 0f;
+
+        if(!IsGrounded)
+        {
+            UseAirJump();
+        }
 
         float jumpVelocity = Mathf.Sqrt(2f * Mathf.Abs(Physics2D.gravity.y) * data.jumpHeight);
 
@@ -199,6 +207,7 @@ public class PlayerMovement : MonoBehaviour
         if(IsGrounded)
         {
             _coyoteTimer = data.coyoteTime;
+            ResetAirJumps();
         }
     }
 
@@ -209,9 +218,16 @@ public class PlayerMovement : MonoBehaviour
      */
     public void UpdateStates()
     {
-        IsFalling = !IsGrounded && _rb.linearVelocity.y < -0.1f;
+        IsFalling = !IsGrounded && _rb.linearVelocity.y < -0.25f;
         IsJumping = !IsGrounded && _rb.linearVelocity.y > 0.1f;
         IsAirborne = !IsGrounded;
+
+        // Direction Facing
+        float inputX = input.MoveInput.x;
+        if (Mathf.Abs(inputX) > 0.01f)
+        {
+            IsFacingRight = inputX > 0f;
+        }
     }
 
     /* 
@@ -225,43 +241,54 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /* 
-     * PLAYER FACING
-     * Handles sprite orientation based on movement direction.
-     */
-    public void HandleFacing()
-    {
-        if (input.MoveInput.x == 0) return;
-
-        bool movingRight = input.MoveInput.x > 0f;
-
-        if (movingRight != IsFacingRight)
-        {
-            Turn();
-        }
-    }
-
-    private void Turn()
-    {
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
-
-        IsFacingRight = !IsFacingRight;
-    }
-
-    /* 
      * JUMP RULE
      * Determines whether jump conditions are valid.
      */
     private bool CanJump()
     {
-        return _jumpBufferTimer > 0f && _coyoteTimer > 0f;
+        bool groundedJump = _jumpBufferTimer > 0f && _coyoteTimer > 0f;
+
+        bool airJump = _jumpBufferTimer > 0f && !IsGrounded && CanUseAirJump();
+
+        return groundedJump || airJump;
     }
 
-    public void ApplyMovementModifier(Modifier modifier)
+    /*
+    * ENABLE DOUBLE JUMP
+    */
+    public void EnableDoubleJump()
     {
-        // Placeholder for future implementation.
+        _maxAirJumps = 1;
+        _airJumpsRemaining = 1;
     }
+
+    /*
+    * DOUBLE JUMP RULE
+    */
+    public bool CanUseAirJump()
+    {
+        return _airJumpsRemaining > 0;
+    }
+
+    /*
+    * CONSUME DOUBLE JUMP
+    */
+    public void UseAirJump()
+    {
+        if (_airJumpsRemaining > 0)
+        {
+            _airJumpsRemaining--;
+        }
+    }
+
+    /*
+    * RESET DOUBLE JUMP
+    */
+    public void ResetAirJumps()
+    {
+        _airJumpsRemaining = _maxAirJumps;
+    }
+
 
     /*
     * DEBUG VISUALS
@@ -290,4 +317,12 @@ public class PlayerMovement : MonoBehaviour
         return input * maxSpeed;
     }
 #endif
+
+
+    /*
+    * PUBLIC API
+    */
+    public Vector2 Velocity => _rb.linearVelocity;
+    public int MaxAirJumps => _maxAirJumps;
+    public int AirJumpsRemaining => _airJumpsRemaining;
 }
