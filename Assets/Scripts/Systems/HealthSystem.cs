@@ -11,8 +11,10 @@ using UnityEngine;
 public class HealthSystem : MonoBehaviour
 {
     // Variables
+    [SerializeField] private int maxHealth = 3;
+
     public int currentHealth;
-    public int maxHealth;
+    public int MaxHealth => maxHealth;
 
     public AudioManager audioManager;
 
@@ -24,20 +26,65 @@ public class HealthSystem : MonoBehaviour
     // Unity Methods
     void Start()
     {
-        // Initial Setup
-        currentHealth = maxHealth;
+        InitialiseHealth();
     }
-    // Methods
+    
+    /*
+     * INITIALIZE HEALTH
+     * Sets current health to the maximum health value.
+     */
+    public void InitialiseHealth()
+    {
+        currentHealth = maxHealth;
+        onHealthChanged?.Invoke();
+    }
+
+    /*
+     * DAMAGE
+     * Reduces players health and triggers death when health reaches to zero.
+     */
     public void TakeDamage(int amount)
     {
-    
+        if (!isAlive())
+        {
+            return;
+        }
+
+        currentHealth -= amount;
+
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+
+        onHealthChanged?.Invoke();
+
+        if (currentHealth <= 0)
+        {
+            onDeath?.Invoke();
+        }    
     }
     
+    /*
+     * HEALING
+     * Restores health without exceeding the maximum heath limit.
+     */
     public void Heal(int amount)
     {
+        currentHealth += amount;
 
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        onHealthChanged?.Invoke();
     }
 
+    /*
+     * CHECK IF ALIVE
+     * Returns whether the player still has any health remaining.
+     */
     public bool isAlive()
     {
         return currentHealth > 0;
