@@ -31,7 +31,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Methods
+    /*
+     * METHODS
+     * Handles player damage, modifiers and death behaviour.
+     */
     public void TakeDamage(int amount)
     {
         if (health != null)

@@ -10,7 +10,10 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    // Variables
+    /*
+     * VARIABLES
+     * Stores the player's current and maximum health values.
+     */
     [SerializeField] private int maxHealth = 3;
 
     public int currentHealth;
@@ -18,19 +21,25 @@ public class HealthSystem : MonoBehaviour
 
     public AudioManager audioManager;
 
-    // Events
+    /*
+     * EVENTS
+     * Notifies the other systems when health changes or when the player dies.
+     */
     public Action onHealthChanged;
     public Action onDeath;
 
 
-    // Unity Methods
+    /*
+     * UNITY METHODS
+     * Initialises player health when gameplay starts.
+     */
     void Start()
     {
         InitialiseHealth();
     }
     
     /*
-     * INITIALIZE HEALTH
+     * INITIALISE HEALTH
      * Sets current health to the maximum health value.
      */
     public void InitialiseHealth()
@@ -41,11 +50,11 @@ public class HealthSystem : MonoBehaviour
 
     /*
      * DAMAGE
-     * Reduces players health and triggers death when health reaches to zero.
+     * Reduces player health and triggers death when health reaches zero.
      */
     public void TakeDamage(int amount)
     {
-        if (!isAlive())
+        if (!IsAlive())
         {
             return;
         }
@@ -67,7 +76,7 @@ public class HealthSystem : MonoBehaviour
     
     /*
      * HEALING
-     * Restores health without exceeding the maximum heath limit.
+     * Restores health without exceeding the maximum health limit.
      */
     public void Heal(int amount)
     {
@@ -85,7 +94,7 @@ public class HealthSystem : MonoBehaviour
      * CHECK IF ALIVE
      * Returns whether the player still has any health remaining.
      */
-    public bool isAlive()
+    public bool IsAlive()
     {
         return currentHealth > 0;
     }

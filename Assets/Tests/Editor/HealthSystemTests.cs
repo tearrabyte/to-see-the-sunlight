@@ -13,4 +13,16 @@ public class HealthSystemTests
 
         Object.DestroyImmediate(player);
     }
+
+    [Test]
+    public void Player_Loses_One_Health_When_Damaged()
+    {
+        GameObject player = new GameObject();
+        HealthSystem health = player.AddComponent<HealthSystem>();
+        health.InitialiseHealth();
+        health.TakeDamage(1);
+        Assert.AreEqual(2, health.currentHealth);
+
+        Object.DestroyImmediate(player);
+    }
 }
