@@ -29,9 +29,11 @@ MonoBehaviour:
   apexAccelerationMultiplier: 1.25
   apexSpeedMultiplier: 1.1
   defaultVisionRadius: 0.75
-  blindnessVisionRadius: 0.45
+  blindnessVisionRadius: 0.33
   lanternVisionRadius: 1.5
   defaultFlickerAmount: 0.08
-  blindnessFlickerAmount: 0.04
+  blindnessFlickerAmount: 0.06
+  lanternFlickerAmount: 0.1
   defaultFlickerSpeed: 1.5
-  blindnessFlickerSpeed: 1
+  blindnessFlickerSpeed: 2
+  lanternFlickerSpeed: 1
