@@ -3,32 +3,29 @@ using UnityEngine;
 /*
  * BiomeMechanic
  * -------------
- * Base class for biome-specific mechanics that affect gameplay conditions (e.g. temperature, visibility, movement).
- * Activated when the player enters a biome and deactivated on exit.
+ * Base class for biome-specific environmental behaviour.
+ * Handles activation lifecycle.
  */
 
 public abstract class BiomeMechanic : MonoBehaviour
 {
-    // Variables
-    protected Level level;
     protected bool isActive;
 
-    // Methods
+    /* 
+     * ACTIVATE
+     * Called when biome becomes active (player enters).
+     */
     public virtual void Activate()
-        // Use virtual so child classes may override the default behaviour if necessary.
     {
         isActive = true;
     }
 
+    /* 
+     * DEACTIVATE
+     * Called when biome is no longer active (player exits).
+     */
     public virtual void Deactivate()
     {
         isActive = false;
-    }
-
-    public abstract void ApplyEffect(Player player);
-
-    public virtual void UpdateEffect(Player player)
-    {
-
     }
 }
