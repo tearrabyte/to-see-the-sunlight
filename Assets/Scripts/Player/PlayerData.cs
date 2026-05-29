@@ -70,8 +70,20 @@ public class PlayerData : ScriptableObject
      * Controls player visibility radius in biome darkness.
      */
     [Header("Vision")]
-    [Range(0f, 10f)] public float defaultVisionRadius = 3f;
-    [Range(0f, 10f)] public float reducedVisionRadius = 1f;
-    [Range(0f, 10f)] public float increasedVisionRadius = 5f;
+    [Range(0f, 10f)] public float defaultVisionRadius = 0.75f;
+    [Range(0f, 10f)] public float blindnessVisionRadius = 0.33f;
+    [Range(0f, 10f)] public float lanternVisionRadius = 1.5f;
 
+    /* 
+    * VISION FLICKER
+    * Controls atmospheric fluctuation of player visibility.
+    */
+    [Header("Vision Flicker")]
+    public float defaultFlickerAmount = 0.08f;
+    public float blindnessFlickerAmount = 0.06f;
+    public float lanternFlickerAmount = 0.1f;
+
+    public float defaultFlickerSpeed = 1.5f;
+    public float blindnessFlickerSpeed = 2f;
+    public float lanternFlickerSpeed = 1f;
 }

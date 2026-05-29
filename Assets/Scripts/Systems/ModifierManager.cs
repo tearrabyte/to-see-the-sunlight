@@ -16,6 +16,8 @@ public class ModifierManager : MonoBehaviour
      * External systems affected by modifiers
      */
     public Player player;
+    private PlayerMovement _playerMovement;
+    private PlayerView _playerView;
 
     /* 
      * STATE
@@ -30,6 +32,16 @@ public class ModifierManager : MonoBehaviour
      */
     public Action onModifiersChanged;
 
+
+    /* 
+     * AWAKE
+     * Required player component references.
+     */
+    private void Awake()
+    {
+        _playerMovement = GetComponent<PlayerMovement>();
+        _playerView = GetComponent<PlayerView>();
+    }
 
     /* 
      * ACTIVE MODIFIERS
@@ -54,27 +66,16 @@ public class ModifierManager : MonoBehaviour
             // Movement Modifiers
             if(modifier.type == ModifierType.Movement)
             {
-                PlayerMovement movement = GetComponent<PlayerMovement>();
-
                 if(modifier.movementModifierType == MovementModifierType.DoubleJump)
                 {
-                    movement.EnableDoubleJump();
+                    _playerMovement.EnableDoubleJump();
                 }
             }
             
             // Vision Modifiers
             if(modifier.type == ModifierType.Vision)
             {
-                PlayerView view = GetComponent<PlayerView>();
-
-                if(modifier.visionModifierType == VisionModifierType.Blindness)
-                {
-                    view.UpdateVisionRadius(player.movement.data.reducedVisionRadius);
-                }
-                else if(modifier.visionModifierType== VisionModifierType.GlowwormLantern)
-                {
-                    view.UpdateVisionRadius(player.movement.data.increasedVisionRadius);
-                }
+                _playerView.ApplyVisionModifier(modifier.visionModifierType);
             }
 
             onModifiersChanged?.Invoke();
@@ -91,19 +92,13 @@ public class ModifierManager : MonoBehaviour
         if (modifier != null)
         {
             activeModifiers.Remove(modifier);
-            onModifiersChanged?.Invoke();
 
             if(modifier.type == ModifierType.Vision)
             {
-                PlayerView view = GetComponent<PlayerView>();
-
-                view.UpdateVisionRadius(player.movement.data.defaultVisionRadius);
+                _playerView.RestoreDefaultVision();
             }
+
+            onModifiersChanged?.Invoke();
         }
-    }
-
-    public void UpdateModifiers()
-    {
-
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -20,32 +19,35 @@ public class PlayerView : MonoBehaviour
     public Animator animator;
     public PlayerMovement movement;
 
-
-    /* 
-     * VISUAL EFFECTS
-     * Runtime modifier-driven visual effects.
-     */
-    [Header("Effects")]
-    public List<Modifier> currentEffects = new List<Modifier>();
-
-
     /* 
      * VISION
      * Controls player visibility in different biome environments.
      */
     [Header("Vision")]
     public Light2D visionLight;
-    [SerializeField] private float visionRadius;
 
+    private float _baseVisionRadius;
+    private float _currentFlickerAmount;
+    private float _currentFlickerSpeed;
+
+    /* 
+     * START
+     * Initialises player visual systems.
+     */
     private void Start()
     {
         InitialiseVision();
     }
 
+    /* 
+     * UPDATE
+     * Updates runtime visual systems each frame.
+     */
     private void Update()
     {
         UpdateAnimations();
         UpdateFacing();
+        UpdateVisionFlicker();
     }
 
 
@@ -78,15 +80,14 @@ public class PlayerView : MonoBehaviour
 
 
     /* 
-     * VISION
-     * Controls runtime player visibility behaviour and light state.
+     * INITIALISE VISION
+     * Initialises the default player vision state.
      */
     private void InitialiseVision()
     {
         if (movement == null || movement.data == null || visionLight == null) return;
 
-        visionRadius = movement.data.defaultVisionRadius;
-        visionLight.shapeLightFalloffSize = visionRadius;
+        RestoreDefaultVision();
     }
 
     /* 
@@ -114,30 +115,75 @@ public class PlayerView : MonoBehaviour
     }
 
     /* 
-    * UPDATE VISION
-    * Adjusts the radius of the player vision light.
+    * APPLY VISION MODIFIER
+    * Applies runtime vision behaviour based on modifier state.
     */
-    public void UpdateVisionRadius(float radius)
+    public void ApplyVisionModifier(VisionModifierType modifierType)
+    {
+        switch(modifierType)
+        {
+            case VisionModifierType.Blindness:
+                UpdateVisionRadius(
+                    movement.data.blindnessVisionRadius,
+                    movement.data.blindnessFlickerAmount,
+                    movement.data.blindnessFlickerSpeed);
+                break;
+
+            case VisionModifierType.GlowwormLantern:
+                UpdateVisionRadius(
+                    movement.data.lanternVisionRadius,
+                    movement.data.lanternFlickerAmount,
+                    movement.data.lanternFlickerSpeed);
+                break;
+        }
+    }
+
+    /* 
+    * RESTORE DEFAULT VISION
+    * Restores the default biome vision state.
+    */
+    public void RestoreDefaultVision()
+    {
+        UpdateVisionRadius(
+            movement.data.defaultVisionRadius,
+            movement.data.defaultFlickerAmount,
+            movement.data.defaultFlickerSpeed);
+    }
+
+    /* 
+    * UPDATE VISION
+    * Updates player vision radius and flicker behaviour.
+    */
+    public void UpdateVisionRadius(float radius, float flickerAmount, float flickerSpeed)
     {
         if(visionLight == null) return;
 
-        visionRadius = radius;
-        visionLight.shapeLightFalloffSize = visionRadius;
+        _baseVisionRadius = radius;
+
+        _currentFlickerAmount = flickerAmount;
+        _currentFlickerSpeed = flickerSpeed;
+
+        visionLight.transform.localScale = Vector3.one * radius;
     }
 
-    public void UpdateVisualEffects()
+    /* 
+    * VISION FLICKER
+    * Applies atmospheric fluctuation to the player vision radius.
+    */
+    private void UpdateVisionFlicker()
     {
+        if (visionLight == null) return;
 
-    }
+        if (_currentFlickerAmount <= 0f)
+        {
+            visionLight.transform.localScale = Vector3.one * _baseVisionRadius;
+            return;
+        }
 
-    public void ApplyEffect(Modifier modifier)
-    {
+        float flicker = Mathf.Sin(Time.time * _currentFlickerSpeed) * _currentFlickerAmount;
+        float clampFlicker = Mathf.Max(0.25f, _baseVisionRadius + flicker);
 
-    }
-
-    public void RemoveEffect(Modifier modifier)
-    {
-
+        visionLight.transform.localScale = Vector3.one * clampFlicker;
     }
 
 }
