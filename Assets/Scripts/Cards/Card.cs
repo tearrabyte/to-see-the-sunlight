@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
  * Card
@@ -15,7 +16,13 @@ public class Card : MonoBehaviour
     public bool isSelected;
     public GameObject cardBack;
     public GameObject cardFront;
+    public Image modifierIcon;
     private Vector3 originalScale;
+    
+    /*
+     * START
+     * Initalizes the card state and stores its original scale.
+     */
 
     private void Start()
     {
@@ -32,7 +39,27 @@ public class Card : MonoBehaviour
         }
     }
 
+    /*
+     * SET MODIFIER
+     * Assigns a modifier and updates the card icon.
+     */
+    public void SetModifier(Modifier newModifier)
+    {
+        modifier = newModifier;
+
+        if (modifierIcon != null && modifier != null)
+        {
+            modifierIcon.sprite = modifier.icon;
+        }
+
+    }
+
     // Methods
+
+    /*
+     * REVEAL
+     * Displays the front of the card and hides the back of the card.
+     */
     public void Reveal()
     {
         isRevealed = true;
@@ -48,12 +75,20 @@ public class Card : MonoBehaviour
         }
     }
 
+    /*
+     * SELECT
+     * Marks the card as selected and makes it larger visually.
+     */
     public void Select()
     {
         isSelected = true;
         transform.localScale = originalScale * 1.15f;
     }
 
+    /*
+     * DESELECT
+     * Restores the card to its original appearance.
+     */
     public void Deselect()
     {
         isSelected = false;
