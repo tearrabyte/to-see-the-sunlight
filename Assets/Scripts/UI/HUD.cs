@@ -21,6 +21,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Image[] heartImages;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
+    [SerializeField] private Image shieldImage;
 
     /*
      * UNITY METHODS
@@ -56,6 +57,11 @@ public class HUD : MonoBehaviour
             {
                 heartImages[i].sprite = emptyHeart;
             }
+        }
+
+        if (shieldImage != null)
+        {
+            shieldImage.enabled = healthSystem.HasShield;
         }
     }
 

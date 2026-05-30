@@ -15,6 +15,11 @@ public class HealthSystem : MonoBehaviour
      * Stores the player's current and maximum health values.
      */
     [SerializeField] private int maxHealth = 3;
+    [SerializeField] private float damageCooldown = 1f;
+    private float nextDamageTime;
+
+    private bool hasShield;
+    public bool HasShield => hasShield;
 
     public int currentHealth;
     public int MaxHealth => maxHealth;
@@ -36,6 +41,7 @@ public class HealthSystem : MonoBehaviour
     void Start()
     {
         InitialiseHealth();
+        EnableShield();
     }
     
     /*
@@ -49,6 +55,22 @@ public class HealthSystem : MonoBehaviour
     }
 
     /*
+     * ENABLE SHIELD
+     * Grants the player an additional health.
+     */
+    public void EnableShield()
+    {
+        if (!hasShield)
+        {
+            hasShield = true;
+            maxHealth += 1;
+            currentHealth += 1;
+            onHealthChanged?.Invoke();
+
+        }
+    }
+
+    /*
      * DAMAGE
      * Reduces player health and triggers death when health reaches zero.
      */
@@ -59,11 +81,24 @@ public class HealthSystem : MonoBehaviour
             return;
         }
 
+        if (Time.time < nextDamageTime)
+        {
+            return;
+        }
+
+        nextDamageTime = Time.time + damageCooldown;
+
         currentHealth -= amount;
 
         if (currentHealth < 0)
         {
             currentHealth = 0;
+        }
+
+        if (hasShield && currentHealth <= 3)
+        {
+            hasShield = false;
+            maxHealth = 3;
         }
 
         onHealthChanged?.Invoke();
