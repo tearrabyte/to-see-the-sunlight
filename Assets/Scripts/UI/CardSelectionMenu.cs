@@ -11,7 +11,10 @@ using System.Collections;
 
 public class CardSelectionMenu : MonoBehaviour
 {
-    // Variables
+    /*
+     * REFERENCES
+     * Extenal systems and UI elements used by the card selection menu.
+     */
     public CardSelectionSystem cardSystem;
     public Card[] cards;
 
@@ -26,7 +29,7 @@ public class CardSelectionMenu : MonoBehaviour
 
     /*
      * START
-     * Initalizes UI elements and disables the players movement while the card selection menu is active
+     * Initalizes UI elements when the card selection menu loads.
      * */
     private void Start()
     {
@@ -34,22 +37,26 @@ public class CardSelectionMenu : MonoBehaviour
         {
             descriptionText.text = "";
         }
+        Show();
+    }
+    
+    /*
+     * SHOW MENU
+     * Opens the card selection menu and disables the players movement.
+     */
+    public void Show()
+    {
+        cardMenuPanel.SetActive(true);
 
         if (playerMovement != null)
         {
             playerMovement.enabled = false;
-        }    
-    }
-    
-    // Methods
-    public void Show()
-    {
-
+        }
     }
 
     /*
      * HIDE MENU
-     * Closes the card selection menu and restores the players movements
+     * Closes the card selection menu and restores the players movements.
      */
     public void Hide()
     {
@@ -102,7 +109,7 @@ public class CardSelectionMenu : MonoBehaviour
     }
     /*
      * CONFIRM CARD
-     * Applies the selected modifier and transitions the menu into the continue state.
+     * Applies the selected modifier and changes the menu into the continue state.
      */
 
     public void ConfirmSelectedCard()

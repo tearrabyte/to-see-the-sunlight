@@ -562,6 +562,8 @@ MonoBehaviour:
     type: 0
     description: 
     movementModifierType: 0
+    visionModifierType: 0
+    healthModifierType: 0
     effectValue: 0
     isApplied: 0
     icon: {fileID: 0}
@@ -751,6 +753,8 @@ MonoBehaviour:
     type: 0
     description: 
     movementModifierType: 0
+    visionModifierType: 0
+    healthModifierType: 0
     effectValue: 0
     isApplied: 0
     icon: {fileID: 0}
@@ -841,21 +845,35 @@ MonoBehaviour:
   - type: 0
     description: Allows for one extra jump while in the air
     movementModifierType: 0
+    visionModifierType: 0
+    healthModifierType: 0
     effectValue: 1
     isApplied: 0
     icon: {fileID: -776084327, guid: ad88cc1277c97c4478c9a7c13aefa044, type: 3}
-  - type: 0
-    description: Shield
+  - type: 1
+    description: Adds a shield health point
     movementModifierType: 0
-    effectValue: 0
+    visionModifierType: 0
+    healthModifierType: 0
+    effectValue: 1
     isApplied: 0
-    icon: {fileID: 384771527755328561, guid: ad88cc1277c97c4478c9a7c13aefa044, type: 3}
-  - type: 0
-    description: Vision
+    icon: {fileID: -6717884257390833292, guid: 15af4e0fb3c66b44ab13a9398f74a4ba, type: 3}
+  - type: 2
+    description: Decreases your vision
     movementModifierType: 0
-    effectValue: 0
+    visionModifierType: 0
+    healthModifierType: 0
+    effectValue: 1
     isApplied: 0
     icon: {fileID: 2586869892543285870, guid: ad88cc1277c97c4478c9a7c13aefa044, type: 3}
+  - type: 2
+    description: Increases your vision
+    movementModifierType: 0
+    visionModifierType: 1
+    healthModifierType: 0
+    effectValue: 1
+    isApplied: 0
+    icon: {fileID: 384771527755328561, guid: ad88cc1277c97c4478c9a7c13aefa044, type: 3}
   selectedCard: {fileID: 0}
   modifierManager: {fileID: 0}
 --- !u!114 &5853080921060462855
@@ -874,6 +892,7 @@ MonoBehaviour:
   cards:
   - {fileID: 5967017087223166460}
   - {fileID: 7113851119797063294}
+  - {fileID: 4642818285813790199}
   - {fileID: 4642818285813790199}
   cardMenuPanel: {fileID: 5475444244266935082}
   playerMovement: {fileID: 0}
@@ -1757,6 +1776,8 @@ MonoBehaviour:
     type: 0
     description: 
     movementModifierType: 0
+    visionModifierType: 0
+    healthModifierType: 0
     effectValue: 0
     isApplied: 0
     icon: {fileID: 0}

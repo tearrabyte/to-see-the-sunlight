@@ -24,39 +24,64 @@ public class CardSelectionSystem : MonoBehaviour
     {
         RandomiseCardModifiers();
     }
-    
+
     /*
      * RANDOMISE CARD MODIFIERS
      * Assigns available modifiers to cards in a random order.
      */
     public void RandomiseCardModifiers()
     {
-        List<Modifier> modifierPool = new List<Modifier>(availableModifiers);
+        List<Modifier> environmentPool = new List<Modifier>();
+        List<Modifier> bonusPool = new List<Modifier>();
 
-        foreach (Card card in availableCards)
+
+        foreach (Modifier modifier in availableModifiers)
         {
-            if (card == null)
+            if (modifier == null)
             {
                 continue;
             }
-            if (modifierPool.Count == 0)
+
+            if (modifier.type == ModifierType.Vision)
             {
-                return;
+                environmentPool.Add(modifier);
             }
+            else if (modifier.type == ModifierType.Movement || modifier.type == ModifierType.Health)
+            {
+                bonusPool.Add(modifier);
+            }
+        }
 
-            int randomIndex = Random.Range(0, modifierPool.Count);
-            card.SetModifier(modifierPool[randomIndex]);
+        List<Modifier> selectedModifiers = new List<Modifier>();
 
-            modifierPool.RemoveAt(randomIndex);
+        for (int i = 0; i < 2 && environmentPool.Count > 0; i++)
+        {
+            int randomIndex = Random.Range(0, environmentPool.Count);
+            selectedModifiers.Add(environmentPool[randomIndex]);
+            environmentPool.RemoveAt(randomIndex);
+        }
+
+        if (bonusPool.Count > 0)
+        {
+            int randomIndex = Random.Range(0, bonusPool.Count);
+            selectedModifiers.Add(bonusPool[randomIndex]);
+        }
+
+        for (int i = 0; i < availableCards.Count && i < selectedModifiers.Count; i++)
+        {
+            if (availableCards[i] != null)
+            {
+                availableCards[i].SetModifier(selectedModifiers[i]);
+            }
         }
     }
 
     // Methods
 
-    /*
-     * GET SELECTED CARD
-     * Returns the currently selected card.
-     */
+        /*
+         * GET SELECTED CARD
+         * Returns the currently selected card.
+         */
     public Card GetSelectedCard()
     {
         return selectedCard;
