@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
 
 /*
@@ -12,42 +11,94 @@ using UnityEngine;
 
 public class ModifierManager : MonoBehaviour
 {
-    // Variables
-    public List<Modifier> activeModifiers = new List<Modifier>();
+    /* 
+     * REFERENCES
+     * External systems affected by modifiers
+     */
     public Player player;
+    private PlayerMovement _playerMovement;
+    private PlayerView _playerView;
 
-    // Events
+    /* 
+     * STATE
+     * Runtime collection of currently active modifiers
+     */
+    public List<Modifier> activeModifiers = new List<Modifier>();
+
+
+    /* 
+     * EVENTS
+     * Invoked whenever modifier state changes.
+     */
     public Action onModifiersChanged;
 
-    // Methods
+
+    /* 
+     * AWAKE
+     * Required player component references.
+     */
+    private void Awake()
+    {
+        _playerMovement = GetComponent<PlayerMovement>();
+        _playerView = GetComponent<PlayerView>();
+    }
+
+    /* 
+     * ACTIVE MODIFIERS
+     * Returns all currently active modifiers.
+     */
     public List<Modifier> GetActiveModifiers()
     {
         return activeModifiers;
     }
 
+
+    /* 
+     * APPLY MODIFIER
+     * Adds a modifier and applies its gameplay effect
+     */
     public void ApplyModifier(Modifier modifier)
     {
         if(modifier != null)
         {
             activeModifiers.Add(modifier);
 
-            // Route to correct method based on type.
+            // Movement Modifiers
+            if(modifier.type == ModifierType.Movement)
+            {
+                if(modifier.movementModifierType == MovementModifierType.DoubleJump)
+                {
+                    _playerMovement.EnableDoubleJump();
+                }
+            }
+            
+            // Vision Modifiers
+            if(modifier.type == ModifierType.Vision)
+            {
+                _playerView.ApplyVisionModifier(modifier.visionModifierType);
+            }
 
             onModifiersChanged?.Invoke();
         }
-    }    
-    
+    }
+
+
+    /* 
+     * REMOVE MODIFIER
+     * Removes a modifier from the active modifier list.
+     */
     public void RemoveModifier(Modifier modifier)
     {
         if (modifier != null)
         {
             activeModifiers.Remove(modifier);
+
+            if(modifier.type == ModifierType.Vision)
+            {
+                _playerView.RestoreDefaultVision();
+            }
+
             onModifiersChanged?.Invoke();
         }
-    }
-
-    public void UpdateModifiers()
-    {
-
     }
 }

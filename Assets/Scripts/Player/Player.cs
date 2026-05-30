@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*
  * Player
@@ -9,13 +10,31 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Variables
+    /*
+     * REFERENCES
+     * External systems required for health logic
+     */
     public HealthSystem health;
     public PlayerMovement movement;
     public ModifierManager modifierManager;
     public PlayerView playerView;
 
-    // Methods
+    /*
+     * UNITY METHODS
+     * Handles the setup and event subscriptions for when the player is created.
+     */
+    private void Start()
+    {
+        if (health != null)
+        {
+            health.onDeath += Die;
+        }
+    }
+
+    /*
+     * METHODS
+     * Handles player damage, modifiers and death behaviour.
+     */
     public void TakeDamage(int amount)
     {
         if (health != null)
@@ -32,8 +51,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    /* 
+     * DEATH
+     * Sends the player to the death screen when health reaches zero.
+     * Death screen is just a placeholder for now.
+     */
     public void Die()
     {
-
+        SceneManager.LoadScene("DeathScreen");
     }
 }

@@ -15,12 +15,25 @@ public enum ModifierType
     Environment
 }
 
+public enum MovementModifierType
+{
+    DoubleJump,
+}
+
+public enum VisionModifierType
+{
+    Blindness,
+    GlowwormLantern,
+}
+
 [System.Serializable]
 public class Modifier
 {
-    public string name;
-    public string description;
     public ModifierType type;
+    public string description;
+
+    public MovementModifierType movementModifierType;
+    public VisionModifierType visionModifierType;
 
     public float effectValue;
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*
  * DeathScreen
@@ -15,8 +16,12 @@ public class DeathScreen : Menu
 
     }
 
+    /*
+     * RETURN TO MAIN MENU
+     * Loads the main menu scene when the button is pressed.
+     */
     public void ReturnToMainMenu()
     {
-
+        SceneManager.LoadScene("UI_MainMenu");
     }
 }
