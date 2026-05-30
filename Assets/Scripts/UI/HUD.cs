@@ -35,8 +35,6 @@ public class HUD : MonoBehaviour
         }
     }    
 
-    // Methods
-
     /* 
      * UPDATE HEALTH DISPLAY
      * Shows or hides heart icons based on the player's current health.
