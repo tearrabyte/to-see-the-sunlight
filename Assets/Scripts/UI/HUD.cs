@@ -12,13 +12,15 @@ public class HUD : MonoBehaviour
 {
     /*
      * REFERENCES
-     * Core gameplay systems and IU elements used by the HUD.
+     * Core gameplay systems and UI elements used by the HUD.
      */
     public Timer timer;
     public HealthSystem healthSystem;
     public ModifierManager modifierManager;
 
     [SerializeField] private Image[] heartImages;
+    [SerializeField] private Sprite fullHeart;
+    [SerializeField] private Sprite emptyHeart;
 
     /*
      * UNITY METHODS
@@ -48,7 +50,14 @@ public class HUD : MonoBehaviour
 
         for (int i = 0; i < heartImages.Length; i++)
         {
-            heartImages[i].enabled = i < healthSystem.currentHealth;
+            if (i < healthSystem.currentHealth)
+            {
+                heartImages[i].sprite = fullHeart;
+            }
+            else
+            {
+                heartImages[i].sprite = emptyHeart;
+            }
         }
     }
 
