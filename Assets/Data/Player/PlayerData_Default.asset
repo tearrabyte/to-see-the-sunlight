@@ -26,5 +26,14 @@ MonoBehaviour:
   fallGravityMultiplier: 2.5
   apexThreshold: 0.15
   apexGravityMultiplier: 0.5
-  apexAccelerationMultiplier: 1.2
-  apexSpeedMultiplier: 1.05
+  apexAccelerationMultiplier: 1.25
+  apexSpeedMultiplier: 1.1
+  defaultVisionRadius: 0.75
+  blindnessVisionRadius: 0.33
+  lanternVisionRadius: 1.5
+  defaultFlickerAmount: 0.08
+  blindnessFlickerAmount: 0.06
+  lanternFlickerAmount: 0.1
+  defaultFlickerSpeed: 1.5
+  blindnessFlickerSpeed: 2
+  lanternFlickerSpeed: 1
