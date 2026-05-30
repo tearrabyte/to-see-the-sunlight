@@ -20,6 +20,11 @@ public enum MovementModifierType
     DoubleJump,
 }
 
+public enum HealthModifierType
+{
+    Shield,
+}
+
 public enum VisionModifierType
 {
     Blindness,
@@ -34,6 +39,7 @@ public class Modifier
 
     public MovementModifierType movementModifierType;
     public VisionModifierType visionModifierType;
+    public HealthModifierType healthModifierType;
 
     public float effectValue;
 
