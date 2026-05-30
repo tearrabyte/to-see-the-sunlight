@@ -41,9 +41,8 @@ public class HealthSystem : MonoBehaviour
     void Start()
     {
         InitialiseHealth();
-        EnableShield();
     }
-    
+
     /*
      * INITIALISE HEALTH
      * Sets current health to the maximum health value.
@@ -56,7 +55,7 @@ public class HealthSystem : MonoBehaviour
 
     /*
      * ENABLE SHIELD
-     * Grants the player an additional health.
+     * Grants the player an additional health point.
      */
     public void EnableShield()
     {
@@ -76,12 +75,7 @@ public class HealthSystem : MonoBehaviour
      */
     public void TakeDamage(int amount)
     {
-        if (!IsAlive())
-        {
-            return;
-        }
-
-        if (Time.time < nextDamageTime)
+        if (!IsAlive() || Time.time < nextDamageTime)
         {
             return;
         }
@@ -98,7 +92,7 @@ public class HealthSystem : MonoBehaviour
         if (hasShield && currentHealth <= 3)
         {
             hasShield = false;
-            maxHealth = 3;
+            maxHealth -= 1;
         }
 
         onHealthChanged?.Invoke();
