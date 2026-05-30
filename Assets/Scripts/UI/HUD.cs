@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
  * HUD
@@ -9,15 +10,53 @@ using UnityEngine;
 
 public class HUD : MonoBehaviour
 {
-    // Variables
+    /*
+     * REFERENCES
+     * Core gameplay systems and UI elements used by the HUD.
+     */
     public Timer timer;
     public HealthSystem healthSystem;
     public ModifierManager modifierManager;
 
-    // Methods
+    [SerializeField] private Image[] heartImages;
+    [SerializeField] private Sprite fullHeart;
+    [SerializeField] private Sprite emptyHeart;
+
+    /*
+     * UNITY METHODS
+     * Subscribes to health events and updates the display when the HUD starts.
+     */
+    private void Start()
+    {
+        if (healthSystem != null)
+        {
+            healthSystem.onHealthChanged += UpdateHealthDisplay;
+            UpdateHealthDisplay();
+        }
+    }    
+
+    /* 
+     * UPDATE HEALTH DISPLAY
+     * Shows or hides heart icons based on the player's current health.
+     */
     public void UpdateHealthDisplay()
     {
-        //TODO: Read healthSystem.currentHealth
+        if (healthSystem == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < heartImages.Length; i++)
+        {
+            if (i < healthSystem.currentHealth)
+            {
+                heartImages[i].sprite = fullHeart;
+            }
+            else
+            {
+                heartImages[i].sprite = emptyHeart;
+            }
+        }
     }
 
     public void UpdateTimerDisplay()
