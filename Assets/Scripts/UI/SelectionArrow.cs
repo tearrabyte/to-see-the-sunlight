@@ -32,11 +32,11 @@ public class SelectionArrow : MonoBehaviour
     private void OnEnable()
     {
         inputActions.UI.Enable();
-        inputActions.UI.Navigate.performed += OnNavigate;
+        //inputActions.UI.Navigate.performed += OnNavigate;
     }
     private void OnDisable()
     {
-        inputActions.UI.Navigate.performed -= OnNavigate;
+        //inputActions.UI.Navigate.performed -= OnNavigate;
         inputActions.UI.Disable();
     }
     /*

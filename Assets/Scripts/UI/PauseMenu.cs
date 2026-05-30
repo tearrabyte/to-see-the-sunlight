@@ -19,18 +19,31 @@ public class PauseMenu : Menu
      START
      Ensures the pause menu is hidden when the scene loads
     */
+    private bool initialized = false;
+
     private void Start()
     {
+        if (initialized) return;
         Container.SetActive(false);
+        initialized = true;
     }
 
     /*
      AWAKE
      Creates the input actions instance before anything else runs
     */
+    private static PauseMenu instance;
+
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
         inputActions = new PlayerInputActions();
+        DontDestroyOnLoad(gameObject);
     }
     /*
      ON ENABLE/ON DISABLE
@@ -45,6 +58,7 @@ public class PauseMenu : Menu
 
     private void OnDisable()
     {
+        if (inputActions == null) return;
         inputActions.UI.Pause.performed -= OnPausePressed;
         inputActions.UI.Disable();
     }
@@ -74,10 +88,11 @@ public class PauseMenu : Menu
      QUIT TO MENU BUTTON
      Restores time, disables this object, and loads the main menu scene
      */
+
     public void QuittoMenu()
     {
         Time.timeScale = 1;
-        gameObject.SetActive(false);
+        Container.SetActive(false);
         SceneManager.LoadScene("UI_MainMenu");
     }
     /*
@@ -87,6 +102,7 @@ public class PauseMenu : Menu
     public void Restart()
     {
         Time.timeScale = 1;
+        Container.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
