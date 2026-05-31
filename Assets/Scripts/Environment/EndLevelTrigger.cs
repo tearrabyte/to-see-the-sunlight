@@ -12,6 +12,8 @@ public class EndLevelTrigger : MonoBehaviour
      * The location where the player will be teleported.
      */
     [SerializeField] private Transform teleportLocation;
+    [SerializeField] private CardSelectionMenu cardSelectionMenu;
+    [SerializeField] private CardSelectionSystem cardSelectionSystem;
 
     /*
      * TRIGGER ENTER
@@ -32,6 +34,15 @@ public class EndLevelTrigger : MonoBehaviour
 
             player.transform.position = teleportLocation.position;
 
+            if (cardSelectionSystem != null)
+            {
+                cardSelectionSystem.SetCurrentLevel(2);
+            }
+
+            if (cardSelectionMenu != null)
+            {
+                cardSelectionMenu.Show();
+            }
         }
     }
 }
