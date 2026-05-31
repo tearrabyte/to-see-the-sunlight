@@ -40,9 +40,9 @@ public class ModifierManager : MonoBehaviour
      */
     private void Awake()
     {
-        _playerMovement = GetComponent<PlayerMovement>();
-        _playerView = GetComponent<PlayerView>();
-        _healthSystem = GetComponent<HealthSystem>();
+        _playerMovement = player.GetComponent<PlayerMovement>();
+        _playerView = player.GetComponent<PlayerView>();
+        _healthSystem = player.GetComponent<HealthSystem>();
     }
 
     /* 

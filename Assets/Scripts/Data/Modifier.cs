@@ -7,6 +7,10 @@ using UnityEngine;
  * Can be applied or removed from a player.
  */
 
+/*
+ * TYPES OF MODIFIERS
+ * Categories of modifiers available in the game.
+ */
 public enum ModifierType
 {
     Movement,
@@ -44,4 +48,6 @@ public class Modifier
     public float effectValue;
 
     public bool isApplied;
+
+    public Sprite icon;
 }
