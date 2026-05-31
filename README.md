@@ -22,7 +22,7 @@
     <img src="https://img.shields.io/badge/⬇_Download-Play_The_Game-2ea44f?style=for-the-badge&logo=unity&logoColor=white"/>
   </a>
   
-  *Build coming soon - project currently in development.*
+  *This project is currently under active debelopment. Features and gameplay are subject to change.*
   
 </div>
 
@@ -47,6 +47,7 @@
       </ul>
     </li>
     <li><a href="#credits">Credits</a></li>
+    <li><a href="#license">License</a></li>
   </ol>
 </details>
 
@@ -93,37 +94,26 @@ Guide the shadow creature to the surface to experience sunlight for the first ti
 * **Basic health system**  
   A minimal health system to emphasise environmental danger and player precision.
 
-* **Time-based performance tracking**  
-  Tracks player progression and completion time, encouraging optimisation and replayability through faster and more efficient runs.
-
 * **Integrated UI system**  
   Cohesive UI framework including HUD, menus, and card selection interfaces which clearly present game state, player status, and moments of choice. 
   
 * **Custom 2D Visual Assets**  
   Original sprite and environment assets to establish a unique visual identity and create a compelling biome-specific atmosphere.
 
-* **Audio Design**  
-  A combination of custom and sourced audio, including sound effects and music, used to strengthen player feedback and amplify the atmosphere of each biome.
 
 <p align="right"><a href="#readme-top">Back to top</a></p>
 
 
 <!-- BUILT WITH -->
 ### Built With
-#### Engine & Core
-* [![Unity][unity-shield]][unity-url]
-
-#### Programming Language
-* [![C#][csharp-shield]][csharp-url]
+#### Core
+[![Unity][unity-shield]][unity-url]
+[![C#][csharp-shield]][csharp-url]
 
 #### Development Tools
-* [![Visual Studio][visualstudio-shield]][visualstudio-url]
-
-#### Art & Visual Design
-* [![Aseprite][aseprite-shield]][aseprite-url]
-
-#### Audio & Composition
-* [![Beepbox][beepbox-shield]][beepbox-url]
+[![Visual Studio][visualstudio-shield]][visualstudio-url] 
+[![Aseprite][aseprite-shield]][aseprite-url] 
+[![Beepbox][beepbox-shield]][beepbox-url]
 
 <p align="right"><a href="#readme-top">Back to top</a></p>
 
@@ -133,7 +123,12 @@ Guide the shadow creature to the surface to experience sunlight for the first ti
 
 <!-- PLAY THE GAME -->
 ### Play The Game (Recommended)
-*Build coming soon - project currently in development.*
+Download the latest build:
+> https://github.com/tearrabyte/to-see-the-sunlight/releases/latest
+
+1. Download the Windows build (.zip)
+2. Extract the folder
+3. Run: `ToSeeTheSunlight.exe`
 
 <p align="right"><a href="#readme-top">Back to top</a></p>
 
@@ -145,8 +140,6 @@ Guide the shadow creature to the surface to experience sunlight for the first ti
 - Unity Hub
 - Unity 6000.4.0f1
 - Visual Studio
-
-<br />
 
 <!-- INSTALLATION -->
 #### Installation
@@ -167,20 +160,20 @@ git clone https://github.com/tearrabyte/to-see-the-sunlight.git
 <br />
 
 **Development Team**  
-*Scrum Master ∙ Game Designer ∙ Developer*  
-- [![@tearrabyte][tearrabyte-shield]][tearrabyte-url]  
 
-*Product Owner ∙ Developer*  
-- [![@pomegranatees][pomegranatees-shield]][pomegranatees-url]  
-
-*2D Artist ∙ Game Designer ∙ Developer*  
-- [![@dashka-str][dashkastr-shield]][dashkastr-url]  
-
-*Developer*  
-- [![@nijsen][nijsen-shield]][nijsen-url]  
-
+[![@tearrabyte][tearrabyte-shield]][tearrabyte-url]  
+  
+[![@pomegranatees][pomegranatees-shield]][pomegranatees-url]  
+  
+[![@dashka-str][dashkastr-shield]][dashkastr-url]  
+  
 <p align="right"><a href="#readme-top">Back to top</a></p>
 
+<!-- LICENSE -->
+## License
+*This project is not released under an open-source license. All rights are reserved by the authors outlined above.*  
+
+<p align="right"><a href="#readme-top">Back to top</a></p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -211,14 +204,11 @@ git clone https://github.com/tearrabyte/to-see-the-sunlight.git
 [beepbox-url]: https://www.beepbox.co/
 
 <!-- PROJECT CREDITS SHIELDS -->
-[tearrabyte-shield]: https://img.shields.io/badge/GitHub-tearrabyte-181717?style=for-the-badge&logo=github
+[tearrabyte-shield]: https://img.shields.io/badge/GitHub-tearrabyte%20%E2%80%94%20Scrum%20Master%20%E2%88%99%20Game%20Designer%20%E2%88%99%20Developer-181717?style=for-the-badge&logo=github
 [tearrabyte-url]: https://github.com/tearrabyte
 
-[pomegranatees-shield]: https://img.shields.io/badge/GitHub-Pomegranatees-181717?style=for-the-badge&logo=github
+[pomegranatees-shield]: https://img.shields.io/badge/GitHub-Pomegranatees%20%E2%80%94%20Product%20Owner%20%E2%88%99%20Developer-181717?style=for-the-badge&logo=github
 [pomegranatees-url]: https://github.com/Pomegranatees
 
-[dashkastr-shield]: https://img.shields.io/badge/GitHub-dashka--str-181717?style=for-the-badge&logo=github
+[dashkastr-shield]: https://img.shields.io/badge/GitHub-dashka--str%20%E2%80%94%202D%20Artist%20%E2%88%99%20Game%20Designer%20%E2%88%99%20Developer-181717?style=for-the-badge&logo=github
 [dashkastr-url]: https://github.com/dashka-str
-
-[nijsen-shield]: https://img.shields.io/badge/GitHub-nijsen-181717?style=for-the-badge&logo=github
-[nijsen-url]: https://github.com/nijsen
