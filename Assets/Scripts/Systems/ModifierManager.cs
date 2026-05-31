@@ -18,6 +18,7 @@ public class ModifierManager : MonoBehaviour
     public Player player;
     private PlayerMovement _playerMovement;
     private PlayerView _playerView;
+    private HealthSystem _healthSystem;
 
     /* 
      * STATE
@@ -39,8 +40,9 @@ public class ModifierManager : MonoBehaviour
      */
     private void Awake()
     {
-        _playerMovement = GetComponent<PlayerMovement>();
-        _playerView = GetComponent<PlayerView>();
+        _playerMovement = player.GetComponent<PlayerMovement>();
+        _playerView = player.GetComponent<PlayerView>();
+        _healthSystem = player.GetComponent<HealthSystem>();
     }
 
     /* 
@@ -76,6 +78,15 @@ public class ModifierManager : MonoBehaviour
             if(modifier.type == ModifierType.Vision)
             {
                 _playerView.ApplyVisionModifier(modifier.visionModifierType);
+            }
+
+            // Health Modifiers
+            if(modifier.type == ModifierType.Health)
+            {
+                if(modifier.healthModifierType == HealthModifierType.Shield)
+                {
+                    _healthSystem.EnableShield();
+                }
             }
 
             onModifiersChanged?.Invoke();

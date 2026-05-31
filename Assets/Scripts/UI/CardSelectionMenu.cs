@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using System.Collections;
 
 /*
  * CardSelectionMenu
@@ -9,18 +11,61 @@ using UnityEngine;
 
 public class CardSelectionMenu : MonoBehaviour
 {
-    // Variables
+    /*
+     * REFERENCES
+     * Extenal systems and UI elements used by the card selection menu.
+     */
     public CardSelectionSystem cardSystem;
+    public Card[] cards;
 
-    // Methods
+    public GameObject cardMenuPanel;
+    public PlayerMovement playerMovement;
+
+    public TextMeshProUGUI buttonText;
+    public TextMeshProUGUI descriptionText;
+
+    private Card pendingCard;
+    private bool hasConfirmedCard;
+
+    /*
+     * START
+     * Initalizes UI elements when the card selection menu loads.
+     * */
+    private void Start()
+    {
+        if (descriptionText != null)
+        {
+            descriptionText.text = "";
+        }
+        Show();
+    }
+    
+    /*
+     * SHOW MENU
+     * Opens the card selection menu and disables the players movement.
+     */
     public void Show()
     {
+        cardMenuPanel.SetActive(true);
 
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = false;
+        }
     }
 
+    /*
+     * HIDE MENU
+     * Closes the card selection menu and restores the players movements.
+     */
     public void Hide()
     {
+        cardMenuPanel.SetActive(false);
 
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = true;
+        }
     }
 
     public void DisplayCards()
@@ -28,16 +73,106 @@ public class CardSelectionMenu : MonoBehaviour
 
     }
 
+    /*
+     * REVEAL ALL CARDS
+     * Reveals all cards that are currently hidden/displayed.
+     */
     public void RevealCards()
     {
-
+        foreach (Card card in cards)
+        {
+            card.Reveal();
+        }
     }
-
+    /*
+     * SELECT CARD
+     * Stores the selected card and highlights it visually while reducing the size of the other cards.
+     */
     public void SelectCard(Card card)
     {
-        if(cardSystem != null && card != null)
+        if (card != null && hasConfirmedCard == false)
         {
-            cardSystem.SelectCard(card);
+            pendingCard = card;
+
+            foreach (Card currentCard in cards)
+            {
+                if (currentCard == card)
+                {
+                    currentCard.transform.localScale = Vector3.one;
+                }
+                else
+                {
+                    currentCard.transform.localScale = Vector3.one * 0.80f;
+                }
+            }
         }
+    }
+    /*
+     * CONFIRM CARD
+     * Applies the selected modifier and changes the menu into the continue state.
+     */
+
+    public void ConfirmSelectedCard()
+    {
+        if (hasConfirmedCard == true)
+        {
+            Hide();
+            return;
+        }
+
+        if (cardSystem != null && pendingCard != null)
+        {
+            StartCoroutine(RevealCardsOneByOne());
+            cardSystem.SelectCard(pendingCard);
+            UpdateDescription(pendingCard);
+
+            if (buttonText != null)
+            {
+                buttonText.text = "Continue";
+            }
+            hasConfirmedCard = true;
+        }
+    }
+    /*
+     * SHOW CARD DESCRIPTION
+     * Updates the description text when hovering over a card that has been revealed.
+     */
+    public void ShowCardDescription(Card card)
+    {
+        if (hasConfirmedCard == true)
+        {
+            UpdateDescription(card);
+        }
+    }
+    /*
+     * UPDATE DESCRIPTION
+     * Displays the description associated with the modifier
+     */
+    private void UpdateDescription(Card card)
+    {
+        if (descriptionText != null && card != null && card.modifier != null)
+        {
+            descriptionText.text = card.modifier.description;
+        }
+    }
+    /*
+     * CARD REVEAL SEQUENCE
+     * Reveals the selected card first, then reveals the remaining cards one by one with a delay.
+     */
+    private IEnumerator RevealCardsOneByOne()
+    {
+        pendingCard.Reveal();
+
+        yield return new WaitForSeconds(1.5f);
+
+        foreach (Card card in cards)
+        {
+            if (card != pendingCard)
+            {
+                card.Reveal();
+                yield return new WaitForSeconds(1.5f);
+            }
+        }
+        UpdateDescription(pendingCard);
     }
 }

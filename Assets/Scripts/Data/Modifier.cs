@@ -7,6 +7,10 @@ using UnityEngine;
  * Can be applied or removed from a player.
  */
 
+/*
+ * TYPES OF MODIFIERS
+ * Categories of modifiers available in the game.
+ */
 public enum ModifierType
 {
     Movement,
@@ -18,6 +22,11 @@ public enum ModifierType
 public enum MovementModifierType
 {
     DoubleJump,
+}
+
+public enum HealthModifierType
+{
+    Shield,
 }
 
 public enum VisionModifierType
@@ -34,8 +43,11 @@ public class Modifier
 
     public MovementModifierType movementModifierType;
     public VisionModifierType visionModifierType;
+    public HealthModifierType healthModifierType;
 
     public float effectValue;
 
     public bool isApplied;
+
+    public Sprite icon;
 }
