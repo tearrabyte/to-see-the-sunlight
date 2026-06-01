@@ -10,7 +10,10 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    // Variables
+    /*
+     * REFERENCES
+     * Stores the card modifier data and visual card references
+     */
     public Modifier modifier;
     public bool isRevealed;
     public bool isSelected;
@@ -21,7 +24,7 @@ public class Card : MonoBehaviour
     
     /*
      * START
-     * Initalizes the card state and stores its original scale.
+     * Initialises the card state and stores its original scale.
      */
 
     private void Start()
@@ -37,6 +40,11 @@ public class Card : MonoBehaviour
         {
             cardFront.SetActive(false);
         }
+
+        if (modifierIcon != null)
+        {
+            modifierIcon.gameObject.SetActive(false);
+        }
     }
 
     /*
@@ -50,6 +58,7 @@ public class Card : MonoBehaviour
         if (modifierIcon != null && modifier != null)
         {
             modifierIcon.sprite = modifier.icon;
+            modifierIcon.gameObject.SetActive(false);
         }
 
     }
@@ -73,7 +82,36 @@ public class Card : MonoBehaviour
         {
             cardFront.SetActive(true);
         }
+
+        if (modifierIcon != null)
+        {
+            modifierIcon.gameObject.SetActive(true);
+        }    
     }
+
+    /*
+     * HIDE
+     * Displays the back of the cards and hides the front of the cards.
+     */
+    public void Hide()
+    {
+        isRevealed = false;
+
+        if (cardBack != null)
+        {
+            cardBack.SetActive(true);
+        }
+
+        if (cardFront != null)
+        {
+            cardFront.SetActive(false);
+        }
+
+        if (modifierIcon != null)
+        {
+            modifierIcon.gameObject.SetActive(false);
+        }
+    }    
 
     /*
      * SELECT

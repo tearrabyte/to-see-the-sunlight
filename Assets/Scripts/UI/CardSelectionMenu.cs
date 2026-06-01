@@ -46,9 +46,39 @@ public class CardSelectionMenu : MonoBehaviour
      */
     public void Show()
     {
+        StopAllCoroutines();
+
         cardMenuPanel.SetActive(true);
 
-        if (playerMovement != null)
+        pendingCard = null;
+        hasConfirmedCard = false;
+
+        if (buttonText != null)
+        {
+            buttonText.text = "Select Card";
+        }    
+
+        if (descriptionText != null)
+        {
+            descriptionText.text = "";
+        }
+
+        foreach (Card card in cards)
+        {
+            if (card != null)
+            {
+                card.Hide();
+                card.SetModifier(card.modifier);
+                card.transform.localScale = Vector3.one;
+            }
+        }
+
+        if (cardSystem != null)
+        {
+            cardSystem.RandomiseCardModifiers();
+        }
+
+        if(playerMovement != null)
         {
             playerMovement.enabled = false;
         }
@@ -60,6 +90,8 @@ public class CardSelectionMenu : MonoBehaviour
      */
     public void Hide()
     {
+        StopAllCoroutines();
+
         cardMenuPanel.SetActive(false);
 
         if (playerMovement != null)

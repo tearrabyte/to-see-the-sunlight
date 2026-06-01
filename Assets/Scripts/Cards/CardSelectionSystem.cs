@@ -9,12 +9,21 @@ using UnityEngine;
 
 public class CardSelectionSystem : MonoBehaviour
 {
-    // Variables
+    /*
+     * REFERENCES
+     * Stores available cards, level specific modifiers and selected card data.
+     */
     public List<Card> availableCards = new List<Card>();
-    public List<Modifier> availableModifiers = new List<Modifier>();
-    public Card selectedCard;
 
+    public List<Modifier> levelOneEnvironmentModifiers = new List<Modifier>();
+    public List<Modifier> levelTwoEnvironmentModifiers = new List<Modifier>();
+    public List<Modifier> bonusModifiers = new List<Modifier>();
+
+    public Card selectedCard;
     public ModifierManager modifierManager;
+
+    private int currentLevel = 1;
+    private List<string> usedBonusModifierDescriptions = new List<string>();
 
     /*
      * START
@@ -26,27 +35,37 @@ public class CardSelectionSystem : MonoBehaviour
     }
 
     /*
+     * SET CURRENT LEVEL
+     * Updates which enviornment modifier pool should be used.
+     */
+    public void SetCurrentLevel(int level)
+    {
+        currentLevel = level;
+    }
+
+    /*
      * RANDOMISE CARD MODIFIERS
      * Assigns available modifiers to cards in a random order.
      */
     public void RandomiseCardModifiers()
     {
-        List<Modifier> environmentPool = new List<Modifier>();
-        List<Modifier> bonusPool = new List<Modifier>();
+        List<Modifier> environmentPool;
 
-
-        foreach (Modifier modifier in availableModifiers)
+        if (currentLevel == 1)
         {
-            if (modifier == null)
-            {
-                continue;
-            }
+            environmentPool = new List<Modifier>(levelOneEnvironmentModifiers);
+        }
+        else
+        {
+            environmentPool = new List<Modifier>(levelTwoEnvironmentModifiers);
+        }
 
-            if (modifier.type == ModifierType.Vision)
-            {
-                environmentPool.Add(modifier);
-            }
-            else if (modifier.type == ModifierType.Movement || modifier.type == ModifierType.Health)
+
+        List<Modifier> bonusPool = new List<Modifier>(); ;
+
+        foreach (Modifier modifier in bonusModifiers)
+        {
+            if (!usedBonusModifierDescriptions.Contains(modifier.description))
             {
                 bonusPool.Add(modifier);
             }
@@ -102,7 +121,19 @@ public class CardSelectionSystem : MonoBehaviour
 
         if (modifierManager != null && card.modifier != null)
         {
+            if (modifierManager.GetActiveModifiers().Contains(card.modifier))
+            {
+                return;
+            }
             modifierManager.ApplyModifier(card.modifier);
+
+            if (card.modifier.type == ModifierType.Movement || card.modifier.type == ModifierType.Health)
+            {
+                if (!usedBonusModifierDescriptions.Contains(card.modifier.description))
+                {
+                    usedBonusModifierDescriptions.Add(card.modifier.description);
+                }
+            }
         }
     }
 }

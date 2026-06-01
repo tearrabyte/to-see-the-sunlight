@@ -26,8 +26,8 @@ public class CardModifierSystemTests
         Card card = cardObject.AddComponent<Card>();
 
         Modifier modifier = new Modifier();
-        modifier.type = ModifierType.Health;
-        modifier.description = "Test modifier";
+        modifier.type = ModifierType.Environment;
+        modifier.description = "Test Modifier";
         card.modifier = modifier;
 
         GameObject systemObject = new GameObject();
@@ -35,6 +35,7 @@ public class CardModifierSystemTests
 
         ModifierManager modifierManager = systemObject.AddComponent<ModifierManager>();
         cardSelectionSystem.modifierManager = modifierManager;
+
         cardSelectionSystem.SelectCard(card);
 
         Assert.Contains(modifier, modifierManager.activeModifiers);
