@@ -97,7 +97,23 @@ public class ModifierManager : MonoBehaviour
                     _healthSystem.EnableShield();
                 }
             }
-
+            // Cold Modifiers
+            if (modifier.type == ModifierType.Environment)
+            {
+                ColdMeter coldMeter = GetComponent<ColdMeter>();
+                if (coldMeter != null)
+                {
+                    if (modifier.environmentModifierType == EnvironmentModifierType.MoreTime)
+                    {
+                        coldMeter.ApplyWarmthModifier();
+                    }
+                    else if (modifier.environmentModifierType == EnvironmentModifierType.FasterCold)
+                    {
+                        coldMeter.ApplyColdModifier();
+                    }
+                        
+                }
+            }
             onModifiersChanged?.Invoke();
         }
     }

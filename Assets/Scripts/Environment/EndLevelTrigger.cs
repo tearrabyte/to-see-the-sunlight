@@ -41,6 +41,7 @@ public class EndLevelTrigger : MonoBehaviour
 
             if (cardSelectionMenu != null)
             {
+                cardSelectionMenu.SetActivateColdMeter(true);
                 cardSelectionMenu.Show();
             }
         }

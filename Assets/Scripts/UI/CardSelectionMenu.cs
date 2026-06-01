@@ -24,6 +24,9 @@ public class CardSelectionMenu : MonoBehaviour
     public TextMeshProUGUI buttonText;
     public TextMeshProUGUI descriptionText;
 
+    public ColdMeter coldMeter;
+    private bool activateColdMeterOnHide = false;
+
     private Card pendingCard;
     private bool hasConfirmedCard;
 
@@ -98,6 +101,13 @@ public class CardSelectionMenu : MonoBehaviour
         {
             playerMovement.enabled = true;
         }
+        //only acrtivates after card was selected 
+        if (coldMeter != null && activateColdMeterOnHide)
+        {
+            coldMeter.Activate();
+            activateColdMeterOnHide = false;
+        }
+            
     }
 
     public void DisplayCards()
@@ -206,5 +216,10 @@ public class CardSelectionMenu : MonoBehaviour
             }
         }
         UpdateDescription(pendingCard);
+    }
+    //activation marker
+    public void SetActivateColdMeter(bool value)
+    {
+        activateColdMeterOnHide = value;
     }
 }
