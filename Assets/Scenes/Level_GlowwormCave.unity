@@ -20407,6 +20407,102 @@ PrefabInstance:
       propertyPath: modifierManager
       value: 
       objectReference: {fileID: 161606348}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: bonusModifiers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: bonusModifiers.Array.data[0].icon
+      value: 
+      objectReference: {fileID: -776084327, guid: ad88cc1277c97c4478c9a7c13aefa044, type: 3}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: bonusModifiers.Array.data[1].icon
+      value: 
+      objectReference: {fileID: -6717884257390833292, guid: 15af4e0fb3c66b44ab13a9398f74a4ba, type: 3}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: bonusModifiers.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelOneEnvironmentModifiers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelTwoEnvironmentModifiers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: bonusModifiers.Array.data[0].description
+      value: Grants the ability to double jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: bonusModifiers.Array.data[1].description
+      value: Grants an extra shield health point
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelOneEnvironmentModifiers.Array.data[0].icon
+      value: 
+      objectReference: {fileID: 2586869892543285870, guid: ad88cc1277c97c4478c9a7c13aefa044, type: 3}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelOneEnvironmentModifiers.Array.data[0].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelOneEnvironmentModifiers.Array.data[1].icon
+      value: 
+      objectReference: {fileID: 384771527755328561, guid: ad88cc1277c97c4478c9a7c13aefa044, type: 3}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelOneEnvironmentModifiers.Array.data[1].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelTwoEnvironmentModifiers.Array.data[0].icon
+      value: 
+      objectReference: {fileID: -1218823883695198015, guid: 0b6c38890df4ace49ae981080de71999, type: 3}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelTwoEnvironmentModifiers.Array.data[1].icon
+      value: 
+      objectReference: {fileID: -511133062249068954, guid: c01ea507131d5f64d93ba455779e03e3, type: 3}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelOneEnvironmentModifiers.Array.data[0].description
+      value: Reduces vision radius in the Glowworm Cave
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelOneEnvironmentModifiers.Array.data[0].effectValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelOneEnvironmentModifiers.Array.data[1].description
+      value: Extends vision radius in the Glowworm Cave
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelOneEnvironmentModifiers.Array.data[1].effectValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelTwoEnvironmentModifiers.Array.data[0].description
+      value: Placeholder
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelTwoEnvironmentModifiers.Array.data[0].effectValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelTwoEnvironmentModifiers.Array.data[1].description
+      value: Placeholder
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelTwoEnvironmentModifiers.Array.data[1].effectValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelOneEnvironmentModifiers.Array.data[0].visionModifierType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+      propertyPath: levelOneEnvironmentModifiers.Array.data[1].visionModifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5853080921060462855, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
       propertyPath: playerMovement
       value: 
@@ -52238,6 +52334,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndLevelTrigger
   teleportLocation: {fileID: 2125653191}
+  cardSelectionMenu: {fileID: 1023953581}
+  cardSelectionSystem: {fileID: 1023953582}
 --- !u!61 &850869695
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -61380,7 +61478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1003381871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63526,6 +63624,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1023953581 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5853080921060462855, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+  m_PrefabInstance: {fileID: 351189459}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f7fece528d2fc4f868af9db208e57a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardSelectionMenu
+--- !u!114 &1023953582 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3167661221828432396, guid: ab870822a17ee1b41b33216c99de9333, type: 3}
+  m_PrefabInstance: {fileID: 351189459}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85cd00e8cfa88294dadb9443290259d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardSelectionSystem
 --- !u!1 &1024393420
 GameObject:
   m_ObjectHideFlags: 0
@@ -119190,11 +119310,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5829931231721167616, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.75
+      value: 1.89
       objectReference: {fileID: 0}
     - target: {fileID: 5829931231721167616, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.56
+      value: 0.29
       objectReference: {fileID: 0}
     - target: {fileID: 5829931231721167616, guid: fcf0154e40a6d864e805ae2ddb170371, type: 3}
       propertyPath: m_LocalPosition.z
@@ -122061,7 +122181,7 @@ Transform:
   m_GameObject: {fileID: 2039723578}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -59.2, y: -24.1, z: -10}
+  m_LocalPosition: {x: -59.13, y: -28.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

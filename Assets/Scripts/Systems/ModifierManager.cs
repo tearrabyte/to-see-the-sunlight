@@ -40,9 +40,14 @@ public class ModifierManager : MonoBehaviour
      */
     private void Awake()
     {
-        _playerMovement = player.GetComponent<PlayerMovement>();
-        _playerView = player.GetComponent<PlayerView>();
-        _healthSystem = player.GetComponent<HealthSystem>();
+        if (player == null)
+        {
+            player = GetComponent<Player>();
+        }
+
+        _playerMovement = GetComponent<PlayerMovement>();
+        _playerView = GetComponent<PlayerView>();
+        _healthSystem = GetComponent<HealthSystem>();
     }
 
     /* 
@@ -70,6 +75,10 @@ public class ModifierManager : MonoBehaviour
             {
                 if(modifier.movementModifierType == MovementModifierType.DoubleJump)
                 {
+                    if (_playerMovement == null)
+                    {
+                        _playerMovement = GetComponent<PlayerMovement>();
+                    }
                     _playerMovement.EnableDoubleJump();
                 }
             }
