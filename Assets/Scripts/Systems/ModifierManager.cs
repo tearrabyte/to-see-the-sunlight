@@ -103,11 +103,11 @@ public class ModifierManager : MonoBehaviour
                 ColdMeter coldMeter = GetComponent<ColdMeter>();
                 if (coldMeter != null)
                 {
-                    if (modifier.environmentModifierType == EnvironmentModifierType.MoreTime)
+                    if (modifier.environmentModifierType == EnvironmentModifierType.Warmth)
                     {
                         coldMeter.ApplyWarmthModifier();
                     }
-                    else if (modifier.environmentModifierType == EnvironmentModifierType.FasterCold)
+                    else if (modifier.environmentModifierType == EnvironmentModifierType.IcyChill)
                     {
                         coldMeter.ApplyColdModifier();
                     }

@@ -6,7 +6,7 @@ public class ColdMeterTests
     /*
      TEST 1 - COLD METER DECREASES WARMTH WHEN NOT NEAR FIRE
      When the player remains in a cold biome without heat sources,
-     the cold meter gradually fills up
+     the warmth meter gradually decreaces
      */
     [Test]
     public void ColdMeter_DecreasesWarmth_WhenNotNearFire()
@@ -26,7 +26,7 @@ public class ColdMeterTests
     /*
      TEST 2 - CAMPFIRE INCREASES WARMTH WHEN NEAR FIRE
      When the player stands near a campfire,
-     the cold meter decreases
+     the warmth meter increases
      */
     [Test]
     public void ColdMeter_IncreasesWarmth_WhenNearFire()

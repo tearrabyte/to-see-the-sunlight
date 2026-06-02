@@ -37,8 +37,8 @@ public enum VisionModifierType
 
 public enum EnvironmentModifierType
 {
-    MoreTime,
-    FasterCold,
+    Warmth,
+    IcyChill,
 }
 
 [System.Serializable]

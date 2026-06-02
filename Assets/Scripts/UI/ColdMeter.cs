@@ -9,9 +9,6 @@ using UnityEngine.UI;
 public class ColdMeter : MonoBehaviour
 {
 
-    //DrainTime is 8 seconds for full drain.
-    //RefillSpeed is how fast it refills near campfire
-
     [SerializeField] private float drainTime = 8f;
     [SerializeField] private float refillSpeed = 0.5f;
 
