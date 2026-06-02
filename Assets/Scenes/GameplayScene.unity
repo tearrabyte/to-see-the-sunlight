@@ -18143,6 +18143,7 @@ Transform:
   - {fileID: 271264373}
   - {fileID: 1990293782}
   - {fileID: 504413484}
+  - {fileID: 1264724260}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &320463281
@@ -52458,6 +52459,7 @@ MonoBehaviour:
   teleportLocation: {fileID: 2125653191}
   cardSelectionMenu: {fileID: 1023953581}
   cardSelectionSystem: {fileID: 1023953582}
+  iceCaveMechanic: {fileID: 1264724261}
 --- !u!61 &850869695
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -78455,6 +78457,52 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1264724259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1264724260}
+  - component: {fileID: 1264724261}
+  m_Layer: 0
+  m_Name: IceCaveMechanic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1264724260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264724259}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 320085273}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1264724261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264724259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c84e8daa441ab443940b7263dc0901f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IceCaveMechanic
+  coldMeter: {fileID: 161606356}
+  cardSelectionMenu: {fileID: 1023953581}
 --- !u!1 &1272551101
 GameObject:
   m_ObjectHideFlags: 0
