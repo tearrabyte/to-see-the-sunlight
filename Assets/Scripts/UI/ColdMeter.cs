@@ -24,12 +24,12 @@ public class ColdMeter : MonoBehaviour
 
     private HealthSystem healthSystem;
 
-
-    //CurrentWarmth tracks value between 0 and 1
-    //IsNearFire is set by Campfire when player is in range
-    //IsActive controls whether the meter runs at all
-    //IsDamaging prevents repeated damage while meter is empty
-
+   /* Variables
+    * CurrentWarmth tracks value between 0 and 1
+    * IsNearFire is set by Campfire when player is in range
+    * IsActive controls whether the meter runs at all
+    * IsDamaging prevents repeated damage while meter is empty
+    */
     private float currentWarmth = 1f;
     public bool isNearFire = false;
     private bool isActive = false;
