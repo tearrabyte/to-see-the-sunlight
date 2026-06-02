@@ -14,6 +14,7 @@ public class EndLevelTrigger : MonoBehaviour
     [SerializeField] private Transform teleportLocation;
     [SerializeField] private CardSelectionMenu cardSelectionMenu;
     [SerializeField] private CardSelectionSystem cardSelectionSystem;
+    [SerializeField] private IceCaveMechanic iceCaveMechanic;
 
     /*
      * TRIGGER ENTER
@@ -34,11 +35,17 @@ public class EndLevelTrigger : MonoBehaviour
 
             player.transform.position = teleportLocation.position;
 
+            //sets coldmeter after teleporting to level 2
+            if (iceCaveMechanic != null)
+            {
+                iceCaveMechanic.Activate();
+            }
+
             if (cardSelectionSystem != null)
             {
                 cardSelectionSystem.SetCurrentLevel(2);
             }
-
+            
             if (cardSelectionMenu != null)
             {
                 cardSelectionMenu.Show();

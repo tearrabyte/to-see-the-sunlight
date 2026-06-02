@@ -35,6 +35,12 @@ public enum VisionModifierType
     GlowwormLantern,
 }
 
+public enum EnvironmentModifierType
+{
+    Warmth,
+    IcyChill,
+}
+
 [System.Serializable]
 public class Modifier
 {
@@ -44,6 +50,7 @@ public class Modifier
     public MovementModifierType movementModifierType;
     public VisionModifierType visionModifierType;
     public HealthModifierType healthModifierType;
+    public EnvironmentModifierType environmentModifierType;
 
     public float effectValue;
 

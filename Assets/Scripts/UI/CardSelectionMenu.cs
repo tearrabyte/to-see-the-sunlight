@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using System.Collections;
@@ -27,6 +28,7 @@ public class CardSelectionMenu : MonoBehaviour
     private Card pendingCard;
     private bool hasConfirmedCard;
 
+    public Action onMenuClosed;
     /*
      * START
      * Initalizes UI elements when the card selection menu loads.
@@ -98,6 +100,8 @@ public class CardSelectionMenu : MonoBehaviour
         {
             playerMovement.enabled = true;
         }
+
+        onMenuClosed?.Invoke();
     }
 
     public void DisplayCards()
@@ -207,4 +211,5 @@ public class CardSelectionMenu : MonoBehaviour
         }
         UpdateDescription(pendingCard);
     }
+    
 }
