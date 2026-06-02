@@ -608,7 +608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   levels: []
   gameManager: {fileID: 667788639}
-  levelSceneName: Level_GlowwormCave
+  levelSceneName: GameplayScene
 --- !u!1 &693327151
 GameObject:
   m_ObjectHideFlags: 0

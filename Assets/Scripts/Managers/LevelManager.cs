@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     // Variables
     [SerializeField] private List<Level> levels;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private string levelSceneName = "Level_GlowwormCave";
+    [SerializeField] private string levelSceneName = "Gameplay Scene";
     private Level currentLevel;
 
     // Events
